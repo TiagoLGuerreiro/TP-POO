@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico"
+CMAKE_SOURCE_DIR = C:\Users\adm\CLionProjects\TP-POO
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/TP.dir/depend.make
@@ -69,88 +69,88 @@ include CMakeFiles/TP.dir/progress.make
 include CMakeFiles/TP.dir/flags.make
 
 CMakeFiles/TP.dir/main.cpp.obj: CMakeFiles/TP.dir/flags.make
-CMakeFiles/TP.dir/main.cpp.obj: C:/Users/rafae/OneDrive/Ambiente\ de\ Trabalho/POO/Trabalho\ Pratico/main.cpp
+CMakeFiles/TP.dir/main.cpp.obj: C:/Users/adm/CLionProjects/TP-POO/main.cpp
 CMakeFiles/TP.dir/main.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TP.dir/main.cpp.obj"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/main.cpp.obj -MF CMakeFiles\TP.dir\main.cpp.obj.d -o CMakeFiles\TP.dir\main.cpp.obj -c "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TP.dir/main.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/main.cpp.obj -MF CMakeFiles\TP.dir\main.cpp.obj.d -o CMakeFiles\TP.dir\main.cpp.obj -c C:\Users\adm\CLionProjects\TP-POO\main.cpp
 
 CMakeFiles/TP.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/main.cpp.i"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\main.cpp" > CMakeFiles\TP.dir\main.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adm\CLionProjects\TP-POO\main.cpp > CMakeFiles\TP.dir\main.cpp.i
 
 CMakeFiles/TP.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/main.cpp.s"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\main.cpp" -o CMakeFiles\TP.dir\main.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adm\CLionProjects\TP-POO\main.cpp -o CMakeFiles\TP.dir\main.cpp.s
 
 CMakeFiles/TP.dir/caravana.cpp.obj: CMakeFiles/TP.dir/flags.make
-CMakeFiles/TP.dir/caravana.cpp.obj: C:/Users/rafae/OneDrive/Ambiente\ de\ Trabalho/POO/Trabalho\ Pratico/caravana.cpp
+CMakeFiles/TP.dir/caravana.cpp.obj: C:/Users/adm/CLionProjects/TP-POO/caravana.cpp
 CMakeFiles/TP.dir/caravana.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TP.dir/caravana.cpp.obj"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/caravana.cpp.obj -MF CMakeFiles\TP.dir\caravana.cpp.obj.d -o CMakeFiles\TP.dir\caravana.cpp.obj -c "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\caravana.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TP.dir/caravana.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/caravana.cpp.obj -MF CMakeFiles\TP.dir\caravana.cpp.obj.d -o CMakeFiles\TP.dir\caravana.cpp.obj -c C:\Users\adm\CLionProjects\TP-POO\caravana.cpp
 
 CMakeFiles/TP.dir/caravana.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/caravana.cpp.i"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\caravana.cpp" > CMakeFiles\TP.dir\caravana.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adm\CLionProjects\TP-POO\caravana.cpp > CMakeFiles\TP.dir\caravana.cpp.i
 
 CMakeFiles/TP.dir/caravana.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/caravana.cpp.s"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\caravana.cpp" -o CMakeFiles\TP.dir\caravana.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adm\CLionProjects\TP-POO\caravana.cpp -o CMakeFiles\TP.dir\caravana.cpp.s
 
 CMakeFiles/TP.dir/combate.cpp.obj: CMakeFiles/TP.dir/flags.make
-CMakeFiles/TP.dir/combate.cpp.obj: C:/Users/rafae/OneDrive/Ambiente\ de\ Trabalho/POO/Trabalho\ Pratico/combate.cpp
+CMakeFiles/TP.dir/combate.cpp.obj: C:/Users/adm/CLionProjects/TP-POO/combate.cpp
 CMakeFiles/TP.dir/combate.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TP.dir/combate.cpp.obj"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/combate.cpp.obj -MF CMakeFiles\TP.dir\combate.cpp.obj.d -o CMakeFiles\TP.dir\combate.cpp.obj -c "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\combate.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TP.dir/combate.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/combate.cpp.obj -MF CMakeFiles\TP.dir\combate.cpp.obj.d -o CMakeFiles\TP.dir\combate.cpp.obj -c C:\Users\adm\CLionProjects\TP-POO\combate.cpp
 
 CMakeFiles/TP.dir/combate.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/combate.cpp.i"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\combate.cpp" > CMakeFiles\TP.dir\combate.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adm\CLionProjects\TP-POO\combate.cpp > CMakeFiles\TP.dir\combate.cpp.i
 
 CMakeFiles/TP.dir/combate.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/combate.cpp.s"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\combate.cpp" -o CMakeFiles\TP.dir\combate.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adm\CLionProjects\TP-POO\combate.cpp -o CMakeFiles\TP.dir\combate.cpp.s
 
 CMakeFiles/TP.dir/grelha.cpp.obj: CMakeFiles/TP.dir/flags.make
-CMakeFiles/TP.dir/grelha.cpp.obj: C:/Users/rafae/OneDrive/Ambiente\ de\ Trabalho/POO/Trabalho\ Pratico/grelha.cpp
+CMakeFiles/TP.dir/grelha.cpp.obj: C:/Users/adm/CLionProjects/TP-POO/grelha.cpp
 CMakeFiles/TP.dir/grelha.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TP.dir/grelha.cpp.obj"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/grelha.cpp.obj -MF CMakeFiles\TP.dir\grelha.cpp.obj.d -o CMakeFiles\TP.dir\grelha.cpp.obj -c "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\grelha.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TP.dir/grelha.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/grelha.cpp.obj -MF CMakeFiles\TP.dir\grelha.cpp.obj.d -o CMakeFiles\TP.dir\grelha.cpp.obj -c C:\Users\adm\CLionProjects\TP-POO\grelha.cpp
 
 CMakeFiles/TP.dir/grelha.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/grelha.cpp.i"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\grelha.cpp" > CMakeFiles\TP.dir\grelha.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adm\CLionProjects\TP-POO\grelha.cpp > CMakeFiles\TP.dir\grelha.cpp.i
 
 CMakeFiles/TP.dir/grelha.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/grelha.cpp.s"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\grelha.cpp" -o CMakeFiles\TP.dir\grelha.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adm\CLionProjects\TP-POO\grelha.cpp -o CMakeFiles\TP.dir\grelha.cpp.s
 
 CMakeFiles/TP.dir/item.cpp.obj: CMakeFiles/TP.dir/flags.make
-CMakeFiles/TP.dir/item.cpp.obj: C:/Users/rafae/OneDrive/Ambiente\ de\ Trabalho/POO/Trabalho\ Pratico/item.cpp
+CMakeFiles/TP.dir/item.cpp.obj: C:/Users/adm/CLionProjects/TP-POO/item.cpp
 CMakeFiles/TP.dir/item.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/TP.dir/item.cpp.obj"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/item.cpp.obj -MF CMakeFiles\TP.dir\item.cpp.obj.d -o CMakeFiles\TP.dir\item.cpp.obj -c "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\item.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/TP.dir/item.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/item.cpp.obj -MF CMakeFiles\TP.dir\item.cpp.obj.d -o CMakeFiles\TP.dir\item.cpp.obj -c C:\Users\adm\CLionProjects\TP-POO\item.cpp
 
 CMakeFiles/TP.dir/item.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/item.cpp.i"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\item.cpp" > CMakeFiles\TP.dir\item.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adm\CLionProjects\TP-POO\item.cpp > CMakeFiles\TP.dir\item.cpp.i
 
 CMakeFiles/TP.dir/item.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/item.cpp.s"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\item.cpp" -o CMakeFiles\TP.dir\item.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adm\CLionProjects\TP-POO\item.cpp -o CMakeFiles\TP.dir\item.cpp.s
 
 CMakeFiles/TP.dir/jogador.cpp.obj: CMakeFiles/TP.dir/flags.make
-CMakeFiles/TP.dir/jogador.cpp.obj: C:/Users/rafae/OneDrive/Ambiente\ de\ Trabalho/POO/Trabalho\ Pratico/jogador.cpp
+CMakeFiles/TP.dir/jogador.cpp.obj: C:/Users/adm/CLionProjects/TP-POO/jogador.cpp
 CMakeFiles/TP.dir/jogador.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/TP.dir/jogador.cpp.obj"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/jogador.cpp.obj -MF CMakeFiles\TP.dir\jogador.cpp.obj.d -o CMakeFiles\TP.dir\jogador.cpp.obj -c "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\jogador.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/TP.dir/jogador.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/jogador.cpp.obj -MF CMakeFiles\TP.dir\jogador.cpp.obj.d -o CMakeFiles\TP.dir\jogador.cpp.obj -c C:\Users\adm\CLionProjects\TP-POO\jogador.cpp
 
 CMakeFiles/TP.dir/jogador.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/jogador.cpp.i"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\jogador.cpp" > CMakeFiles\TP.dir\jogador.cpp.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adm\CLionProjects\TP-POO\jogador.cpp > CMakeFiles\TP.dir\jogador.cpp.i
 
 CMakeFiles/TP.dir/jogador.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/jogador.cpp.s"
-	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\jogador.cpp" -o CMakeFiles\TP.dir\jogador.cpp.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adm\CLionProjects\TP-POO\jogador.cpp -o CMakeFiles\TP.dir\jogador.cpp.s
 
 # Object files for target TP
 TP_OBJECTS = \
@@ -174,7 +174,7 @@ TP.exe: CMakeFiles/TP.dir/build.make
 TP.exe: CMakeFiles/TP.dir/linkLibs.rsp
 TP.exe: CMakeFiles/TP.dir/objects1.rsp
 TP.exe: CMakeFiles/TP.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable TP.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable TP.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TP.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -186,6 +186,6 @@ CMakeFiles/TP.dir/clean:
 .PHONY : CMakeFiles/TP.dir/clean
 
 CMakeFiles/TP.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico" "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico" "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug" "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug" "C:\Users\rafae\OneDrive\Ambiente de Trabalho\POO\Trabalho Pratico\cmake-build-debug\CMakeFiles\TP.dir\DependInfo.cmake" "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\adm\CLionProjects\TP-POO C:\Users\adm\CLionProjects\TP-POO C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles\TP.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/TP.dir/depend
 

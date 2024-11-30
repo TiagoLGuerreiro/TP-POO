@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include "jogador.h"
+#include "item.h"
 
 using namespace std;
 
@@ -30,7 +32,7 @@ private:
 public:
     Grelha();
 
-    bool lerFicheiro(const string &nomeFicheiro);
+    bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, Item &item);
 
     void mostrarGrelha() const;
 };

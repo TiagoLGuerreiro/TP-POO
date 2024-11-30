@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico
+# Install script for directory: C:/Users/adm/CLionProjects/TP-POO
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/adm/CLionProjects/TP-POO/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
