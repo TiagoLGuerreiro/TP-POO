@@ -1,6 +1,6 @@
 CMakeFiles/TP.dir/caravana.cpp.obj: \
- C:\Users\rafae\OneDrive\Ambiente\ de\ Trabalho\POO\Trabalho\ Pratico\caravana.cpp \
- C:\Users\rafae\OneDrive\Ambiente\ de\ Trabalho\POO\Trabalho\ Pratico\caravana.h \
+ C:\Users\adm\CLionProjects\TP-POO\caravana.cpp \
+ C:\Users\adm\CLionProjects\TP-POO\caravana.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \

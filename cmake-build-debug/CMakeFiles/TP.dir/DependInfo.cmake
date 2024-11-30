@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/caravana.cpp" "CMakeFiles/TP.dir/caravana.cpp.obj" "gcc" "CMakeFiles/TP.dir/caravana.cpp.obj.d"
-  "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/combate.cpp" "CMakeFiles/TP.dir/combate.cpp.obj" "gcc" "CMakeFiles/TP.dir/combate.cpp.obj.d"
-  "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/grelha.cpp" "CMakeFiles/TP.dir/grelha.cpp.obj" "gcc" "CMakeFiles/TP.dir/grelha.cpp.obj.d"
-  "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/item.cpp" "CMakeFiles/TP.dir/item.cpp.obj" "gcc" "CMakeFiles/TP.dir/item.cpp.obj.d"
-  "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/jogador.cpp" "CMakeFiles/TP.dir/jogador.cpp.obj" "gcc" "CMakeFiles/TP.dir/jogador.cpp.obj.d"
-  "C:/Users/rafae/OneDrive/Ambiente de Trabalho/POO/Trabalho Pratico/main.cpp" "CMakeFiles/TP.dir/main.cpp.obj" "gcc" "CMakeFiles/TP.dir/main.cpp.obj.d"
+  "C:/Users/adm/CLionProjects/TP-POO/caravana.cpp" "CMakeFiles/TP.dir/caravana.cpp.obj" "gcc" "CMakeFiles/TP.dir/caravana.cpp.obj.d"
+  "C:/Users/adm/CLionProjects/TP-POO/combate.cpp" "CMakeFiles/TP.dir/combate.cpp.obj" "gcc" "CMakeFiles/TP.dir/combate.cpp.obj.d"
+  "C:/Users/adm/CLionProjects/TP-POO/grelha.cpp" "CMakeFiles/TP.dir/grelha.cpp.obj" "gcc" "CMakeFiles/TP.dir/grelha.cpp.obj.d"
+  "C:/Users/adm/CLionProjects/TP-POO/item.cpp" "CMakeFiles/TP.dir/item.cpp.obj" "gcc" "CMakeFiles/TP.dir/item.cpp.obj.d"
+  "C:/Users/adm/CLionProjects/TP-POO/jogador.cpp" "CMakeFiles/TP.dir/jogador.cpp.obj" "gcc" "CMakeFiles/TP.dir/jogador.cpp.obj.d"
+  "C:/Users/adm/CLionProjects/TP-POO/main.cpp" "CMakeFiles/TP.dir/main.cpp.obj" "gcc" "CMakeFiles/TP.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

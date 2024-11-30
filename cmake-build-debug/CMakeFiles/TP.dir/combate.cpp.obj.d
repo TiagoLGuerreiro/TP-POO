@@ -1,6 +1,6 @@
 CMakeFiles/TP.dir/combate.cpp.obj: \
- C:\Users\rafae\OneDrive\Ambiente\ de\ Trabalho\POO\Trabalho\ Pratico\combate.cpp \
- C:\Users\rafae\OneDrive\Ambiente\ de\ Trabalho\POO\Trabalho\ Pratico\combate.h \
+ C:\Users\adm\CLionProjects\TP-POO\combate.cpp \
+ C:\Users\adm\CLionProjects\TP-POO\combate.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
