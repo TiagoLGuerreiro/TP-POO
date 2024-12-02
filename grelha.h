@@ -4,9 +4,10 @@
 #include <vector>
 #include <string>
 #include "jogador.h"
-#include "item.h"
 
 using namespace std;
+
+class Item;
 
 // classe de cada posição do mapa
 class Posicao {
@@ -35,6 +36,8 @@ public:
     bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, Item &item);
 
     void mostrarGrelha() const;
+
+    vector<Posicao>& getMapa() { return mapa; }
 };
 
 #endif // GRELHA_H

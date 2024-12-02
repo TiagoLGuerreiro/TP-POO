@@ -20,6 +20,7 @@ private:
     int numero;
     int posy;
     int posx;
+    bool destruida;
 
 public:
 };

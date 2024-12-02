@@ -8,6 +8,8 @@
 #include "jogador.h"
 using namespace std;
 
+class Grelha;
+
 class Item{
 private:
     int instante_entre_item;
@@ -26,6 +28,7 @@ public:
     bool Jaula();
     bool Mina();
     bool Surpresa();
+    bool ItemAparecer(Grelha &grelha);
 
     // Método setter, para permitir modificações externas
     void setItem(int i, int d, int m) { instante_entre_item = i, duracao = d, max_itens = m; }

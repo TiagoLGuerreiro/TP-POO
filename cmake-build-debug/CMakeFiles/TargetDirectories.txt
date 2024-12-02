@@ -1,3 +1,3 @@
-C:/Users/adm/CLionProjects/TP-POO/cmake-build-debug/CMakeFiles/TP.dir
-C:/Users/adm/CLionProjects/TP-POO/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/adm/CLionProjects/TP-POO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/tiago/OneDrive/Ambiente de Trabalho/POO/TP/cmake-build-debug/CMakeFiles/TP.dir
+C:/Users/tiago/OneDrive/Ambiente de Trabalho/POO/TP/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/tiago/OneDrive/Ambiente de Trabalho/POO/TP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
