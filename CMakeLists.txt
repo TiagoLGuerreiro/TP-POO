@@ -13,4 +13,6 @@ add_executable(TP main.cpp
         combate.cpp
         grelha.cpp
         item.cpp
-        jogador.cpp)
+        jogador.cpp
+        UI.h
+        UI.cpp)
