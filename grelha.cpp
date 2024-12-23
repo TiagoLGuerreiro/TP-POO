@@ -15,7 +15,7 @@ Grelha::Grelha() : linhas(0), colunas(0){}
 bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, Item &item) {
     ifstream ficheiro(nomeFicheiro);
     if (!ficheiro.is_open()) {
-        cout << "Erro ao abrir o ficheiro: " << nomeFicheiro << endl;
+        cerr << "Erro ao abrir o ficheiro: " << nomeFicheiro << endl;
         return false;
     }
 

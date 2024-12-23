@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\adm\CLionProjects\TP-POO
+CMAKE_SOURCE_DIR = C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\adm\CLionProjects\TP-POO\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -127,6 +127,30 @@ TP: cmake_check_build_system
 TP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/build
 .PHONY : TP/fast
+
+UI.obj: UI.cpp.obj
+.PHONY : UI.obj
+
+# target to build an object file
+UI.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/UI.cpp.obj
+.PHONY : UI.cpp.obj
+
+UI.i: UI.cpp.i
+.PHONY : UI.i
+
+# target to preprocess a source file
+UI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/UI.cpp.i
+.PHONY : UI.cpp.i
+
+UI.s: UI.cpp.s
+.PHONY : UI.s
+
+# target to generate assembly for a file
+UI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/UI.cpp.s
+.PHONY : UI.cpp.s
 
 caravana.obj: caravana.cpp.obj
 .PHONY : caravana.obj
@@ -281,6 +305,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... TP
+	@echo ... UI.obj
+	@echo ... UI.i
+	@echo ... UI.s
 	@echo ... caravana.obj
 	@echo ... caravana.i
 	@echo ... caravana.s
