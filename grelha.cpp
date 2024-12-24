@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#define MAX_DATA_SIZE 1000
 
 using namespace std;
 
@@ -12,7 +13,7 @@ using namespace std;
 Grelha::Grelha() : linhas(0), colunas(0){}
 
 // Ler o ficheiro e carregar a grelha
-bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, Item &item) {
+bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item) {
     ifstream ficheiro(nomeFicheiro);
     if (!ficheiro.is_open()) {
         cerr << "Erro ao abrir o ficheiro: " << nomeFicheiro << endl;
@@ -90,7 +91,12 @@ bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, Item &ite
             }
         }
     }
-    item.setItem(instante_entre_item, duracao_item, max_itens);  // Utiliza um setter para definir valores
+
+    for (Item* i : item) {
+        if (i != nullptr) {
+            i->setItem(instante_entre_item, duracao_item, max_itens); // Utiliza um setter para definir valores
+        }
+    }
 
     ficheiro.close();
     //fazer verificação para fecho do ficheiro (?)
@@ -106,4 +112,26 @@ void Grelha::mostrarGrelha() const {
         }
         cout << endl;
     }
+}
+int pointer = 0;
+void copyData(char* data, char* buffer) {
+    int i = 0;
+    while (buffer[i]) {
+        if (MAX_DATA_SIZE < pointer) {
+            data[pointer++] = buffer[i];
+        } else {
+            return;
+        }
+    }
+}
+
+int Grelha::guardarbuffer(){
+    FILE* fileopen = fopen("mapa.txt", "r");
+    char data[MAX_DATA_SIZE] = "";
+    char buffer[100];
+
+    while (fgets(buffer, sizeof(buffer), fileopen)){
+        copyData(data, buffer);
+    }
+    return 1;
 }

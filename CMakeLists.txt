@@ -15,4 +15,6 @@ add_executable(TP main.cpp
         item.cpp
         jogador.cpp
         UI.h
-        UI.cpp)
+        UI.cpp
+        itensDerivados.cpp
+        itensDerivados.h)

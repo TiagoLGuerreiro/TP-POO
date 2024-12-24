@@ -12,7 +12,7 @@ void mostraInformacoes(int moedas) {
     cout << "Jogador tem " << moedas << " moedas." << endl;
 }
 
-int fase1(Grelha grelha, Jogador jogador, Item item) {
+int fase1(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
     string opcao;
 
     cout << "======================================" << endl;
@@ -27,7 +27,6 @@ int fase1(Grelha grelha, Jogador jogador, Item item) {
 
     if (comando == "config")
         iss >> nomeFicheiro;
-
     else if (comando == "sair") {
         cout << "Decidiu Sair, Ate Breve" << endl;
         return 2;
@@ -36,13 +35,15 @@ int fase1(Grelha grelha, Jogador jogador, Item item) {
         return 1;
     }
 
-    if (!grelha.lerFicheiro(nomeFicheiro, jogador, item)) {
+    if (!grelha.lerFicheiro(nomeFicheiro, jogador, itensAtivos)) {
         return 1;
     }
 
     if (strcmp(opcao.c_str(), "config mapa.txt") == 0) {
         grelha.mostrarGrelha();
         mostraInformacoes(jogador.getMoedas());
+        Item::gerarItem(grelha, itensAtivos, 5, 20);
+        grelha.mostrarGrelha();
     } else {
         cerr << "Config Errada!" << endl;
         return 1;
@@ -50,15 +51,16 @@ int fase1(Grelha grelha, Jogador jogador, Item item) {
     return 0;
 }
 
-int fase2(Grelha grelha, Jogador jogador, Item item) {
+int fase2(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
 
+    string opcaoComando, nome, resto; //nome = nomeFicheiro
+    string escolha;
+    int nInstantes = 0;
+    int j;
 
-        string opcaoComando, nome, resto; //nome = nomeFicheiro
-        string escolha;
-        int nInstantes = 0;
     do {
 
-        cout << "\nComandos Disponoveis: " << endl;
+        cout << "\nComandos Disponiveis: " << endl;
         cout
                 << "exec <nomeFicheiro>, prox <n>, comprac <C> <T>, precos, cidade <C>, caravana <C>, compra <N> <M>, vende <N>, move <N> <X>, auto <N>, stop <N>, barbaro <l> <c>, areia <l> <c> <r>, moedas <N>, tripul <N> <T>, saves <nome>, loads <nome>, lists, dels <nome>, terminar."
                 << endl;
@@ -70,49 +72,52 @@ int fase2(Grelha grelha, Jogador jogador, Item item) {
         iss >> opcaoComando;
 
         iss >> resto;
-        grelha.lerFicheiro("mapa.txt", jogador, item); // MUDAR ESTE MAPA.TXT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        //grelha.lerFicheiro("mapa.txt", jogador, itensAtivos); // MUDAR ESTE MAPA.TXT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Ganda otário rafa, estive 1 hora a tentar descobrir porque é que o mapa voltava ao
+// original e era por causa dessa linha de merda
         if (opcaoComando == "exec") {
-            if (resto == "mapa.txt") {
+            if (resto == "mapa.txt")
                 mostraInformacoes(jogador.getMoedas());
-            } else {
+            else {
                 cerr << "Ficheiro Invalido." << endl;
                 return 1;
             }
-        }
-        else if (opcaoComando == "moedas") {
+        } else if (opcaoComando == "moedas") {
             int moedas = stoi(resto);
             jogador.setMoedas(jogador.getMoedas() + moedas);
             cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas" << endl;
 
-        }
-        else if (opcaoComando == "prox") {
-            if (resto.empty()) {
+        } else if (opcaoComando == "prox") {
+            if (resto.empty())
                 nInstantes = 1;
-            } else
+            else if(stoi(resto) > 0)
                 nInstantes = stoi(resto);
 
-            cout << nInstantes << endl;
+            if(jogador.getInstante() % 10 == 0 || jogador.getInstante() == 0)
+                j = 0;
 
-            /*
+            jogador.setInstante(jogador.getInstante() + nInstantes);
+            cout << "Instante Atual - " << jogador.getInstante() << endl;
+
             for (int i = 0; i < nInstantes; ++i) {      // pular 1 instante ou resto instantes.
-                simulacao
+                ++j;
+                Item::atualizarItens(itensAtivos, jogador.getInstante());
+                if(j % 10 == 0){
+                    Item::gerarItem(grelha, itensAtivos, 5, 20);
+                    grelha.mostrarGrelha();
+                    j=0;
+                }
             }
-            */
-        }
-        else if(opcaoComando == "sair"){
+
+        } else if(opcaoComando == "terminar"){
             cout << "Escolheu Sair, Ate Uma Proxima." << endl;
-        }
-
-
-
-
-
-        else {
+            cout << "Pontuacao final - " << endl; // falta adicionar aqui a pontuacao
+            UserInterface();
+        } else {
             cerr << "Comando Invalido." << endl;
         }
 
-    }while(opcaoComando != "sair");
+    }while(opcaoComando != "terminar");
 
     return 0;
 }
@@ -121,9 +126,9 @@ int fase2(Grelha grelha, Jogador jogador, Item item) {
 int UserInterface() {
     Grelha grelha;
     Jogador jogador;
-    Item item;
+    vector<Item*> itensAtivos;
 
-    int n = fase1(grelha, jogador, item);
+    int n = fase1(grelha, jogador, itensAtivos);
 
     if (n == 1) {
         cerr << "Erro Na Fase 1." << endl;
@@ -131,7 +136,7 @@ int UserInterface() {
     } else if (n == 2)
         exit(0);
 
-    int m = fase2(grelha, jogador, item);
+    int m = fase2(grelha, jogador, itensAtivos);
 
     if (m == 1) {
         cerr << "Erro Na Fase 2." << endl;

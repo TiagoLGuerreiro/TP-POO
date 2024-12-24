@@ -5,33 +5,35 @@
 #ifndef TP_ITEM_H
 #define TP_ITEM_H
 #include <string>
+#include <vector>
 #include "jogador.h"
+#include "caravana.h"
 using namespace std;
 
 class Grelha;
 
 class Item{
 private:
+    int tempoRestante;
     int instante_entre_item;
-    string tipo; // 'P' = caixa de pandora, 'A' = arca do tesouro, 'J' = jaula, 'M' = mina, 'S' = surpresa
-    int duracao;
+    int randomPos;
     int max_itens;
 
 public:
-    Item();
+    Item(int randomPos, int tempoRestante);
+    virtual ~Item();
 
-    int getInstanteEntreItem() const { return instante_entre_item; }
-    int getDuracao() const { return duracao; }
-    int getMaxItens() const { return max_itens; }
-    bool CaixaPandora();
-    bool Arca(Jogador &jogador);
-    bool Jaula();
-    bool Mina();
-    bool Surpresa();
-    bool ItemAparecer(Grelha &grelha);
+    virtual void efeito(Caravana& caravana, Jogador &jogador) = 0;
+    void reduzirTempo(); // reduz tempo restante
+    bool isAtivo() const; // verifica se está ativo
+
+    int getPos() const;
+
+    static void gerarItem(Grelha &grelha, vector<Item*>& itensAtivos, int max_itens, int tempoRestante);
+    static void atualizarItens(vector<Item*>& itensAtivos, int instanteAtual);
 
     // Método setter, para permitir modificações externas
-    void setItem(int i, int d, int m) { instante_entre_item = i, duracao = d, max_itens = m; }
+    void setItem(int i, int t, int m) { instante_entre_item = i, tempoRestante = t, max_itens = m; }
 };
 
 #endif //TP_ITEM_H

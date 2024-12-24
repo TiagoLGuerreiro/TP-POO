@@ -33,9 +33,11 @@ private:
 public:
     Grelha();
 
-    bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, Item &item);
+    bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item);
 
     void mostrarGrelha() const;
+
+    int guardarbuffer();
 
     vector<Posicao>& getMapa() { return mapa; }
 };
