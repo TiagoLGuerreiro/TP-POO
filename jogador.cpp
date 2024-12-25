@@ -6,4 +6,4 @@
 #include <iostream>
 #include <sstream>
 
-Jogador::Jogador() : moedas(0){}
+Jogador::Jogador(int moedas) : moedas(moedas), quantidadesCaravanas(0), vida(0), instanteAtual(0){}

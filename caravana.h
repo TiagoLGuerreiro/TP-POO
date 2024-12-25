@@ -6,23 +6,38 @@
 #define TP_CARAVANA_H
 
 #include <string>
+#include <iostream>
+#include "grelha.h"
+#include "jogador.h"
 using namespace std;
 
 class Caravana{
 private:
-    int tripulaçao;
-    string tipo;
-    int vida;
-    int agua;
-    int aguaMaxima;
-    int toneladaMaxima;
-    int mercadoria;
-    int numero;
-    int posy;
-    int posx;
+    int id;
+    int capacidadeCarga, capacidadeAgua;
+    int tripulantes, cargaAtual, aguaAtual;
+    int pos;
     bool destruida;
 
 public:
+    Caravana(int id, int pos, int carga, int agua, int tripulantes);
+
+    virtual ~Caravana() = default;
+
+    int getId() const { return id; }
+    int getPosicao() const { return pos; }
+    void setPosicao(int novaPosicao) {pos = novaPosicao;}
+    static bool verificarCaravanaID(const vector<Caravana*>& caravanasAtivas, int id);
+
+    static void criar(vector<Caravana*>& caravanasAtivas, Grelha &grelha);
+
+    virtual void mover(int colunas, const string& direcao, Grelha& grelha, int novaPosicao, int id, vector<Item*>& item, Jogador &jogador);
+    //virtual void movimentarAutonomamente() = 0;
+    //virtual void movimentarSemTripulantes() = 0;
+    //virtual void atualizar(int instante) = 0;
+
+    void reabastecerAgua();
+    void venderCarga();
 };
 
 #endif //TP_CARAVANA_H

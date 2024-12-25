@@ -12,35 +12,35 @@
 // Caixa de Pandora
 class CaixaPandora : public Item{
     public:
-        CaixaPandora(int randomPos, int tempoRestante);
+        CaixaPandora(int randomPos, int tempoRestante, char tipo);
         void efeito(Caravana& caravana, Jogador &jogador) override; // override é usado para verificar que não tem erros na chamada
 };
 
 // Arca do Tesouro
 class ArcaTesouro : public Item {
 public:
-    ArcaTesouro(int randomPos, int tempoRestante);
+    ArcaTesouro(int randomPos, int tempoRestante, char tipo);
     void efeito(Caravana& caravana, Jogador &jogador) override;
 };
 
 // Jaula
 class Jaula : public Item {
 public:
-    Jaula(int randomPos, int tempoRestante);
+    Jaula(int randomPos, int tempoRestante, char tipo);
     void efeito(Caravana& caravana, Jogador &jogador) override;
 };
 
 // Mina
 class Mina : public Item {
 public:
-    Mina(int randomPos, int tempoRestante);
+    Mina(int randomPos, int tempoRestante, char tipo);
     void efeito(Caravana& caravana,Jogador &jogador) override;
 };
 
 // Surpresa
 class Surpresa : public Item {
 public:
-    Surpresa(int randomPos, int tempoRestante);
+    Surpresa(int randomPos, int tempoRestante, char tipo);
     void efeito(Caravana& caravana, Jogador &jogador) override;
 };
 

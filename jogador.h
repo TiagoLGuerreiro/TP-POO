@@ -7,13 +7,13 @@
 
 class Jogador{
 private:
-    int moedas = 0;
-    int quantidadesCaravanas = 0;
-    int vida = 0;
-    int instanteAtual = 0;
+    int moedas;
+    int quantidadesCaravanas;
+    int vida;
+    int instanteAtual;
 
 public:
-    Jogador();
+    Jogador(int moedas);
 
     int getMoedas() const { return moedas; }
     int getInstante() const { return instanteAtual; }

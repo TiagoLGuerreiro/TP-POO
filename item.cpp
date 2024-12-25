@@ -3,18 +3,13 @@
 //
 
 #include "item.h"
-#include "jogador.h"
 #include "grelha.h"
 #include "itensDerivados.h"
-#include <iostream>
-#include <sstream>
 #include <ctime>
-
-#include <fstream>
 
 using namespace std;
 
-Item::Item(int randomPos, int tempoRestante) : randomPos(randomPos), tempoRestante(tempoRestante){}
+Item::Item(int randomPos, int tempoRestante, char tipo) : randomPos(randomPos), tempoRestante(tempoRestante), tipo(tipo){}
 
 Item::~Item(){}
 
@@ -31,17 +26,25 @@ int Item::getPos() const {
     return randomPos;
 }
 
+char Item::getTipo() const {
+    return tipo;
+}
+
+
 void Item::gerarItem(Grelha &grelha, vector<Item*>& itensAtivos, int maxItens, int tempoRestante) {
-    static int ultimoInstante = 0;
-    srand(time(0));
     vector<Posicao>&mapa = grelha.getMapa();
     int randomPos;
+
+    static bool isSeeded = false; // Para garantir que a semente seja inicializada apenas uma vez
+    if (!isSeeded) {
+        srand(time(0));
+        isSeeded = true;
+    }
 
     if (itensAtivos.size() >= maxItens || tempoRestante <= 0)
         return; // Limite de itens atingido ou intervalo ainda não foi atingido
 
     do{
-
         randomPos = rand() % (mapa.size() + 1);
 
         if(mapa[randomPos].getTipo() == '.'){
@@ -50,11 +53,11 @@ void Item::gerarItem(Grelha &grelha, vector<Item*>& itensAtivos, int maxItens, i
             int tipo = rand() % 5; // Sorteia o tipo do item
 
             switch (tipo) {
-                case 0: itensAtivos.push_back(new CaixaPandora(randomPos, tempoRestante)); break;
-                case 1: itensAtivos.push_back(new ArcaTesouro(randomPos, tempoRestante)); break;
-                case 2: itensAtivos.push_back(new Jaula(randomPos, tempoRestante)); break;
-                case 3: itensAtivos.push_back(new Mina(randomPos, tempoRestante)); break;
-                case 4: itensAtivos.push_back(new Surpresa(randomPos, tempoRestante)); break;
+                case 0: itensAtivos.push_back(new CaixaPandora(randomPos, tempoRestante, 'C')); break;
+                case 1: itensAtivos.push_back(new ArcaTesouro(randomPos, tempoRestante, 'A')); break;
+                case 2: itensAtivos.push_back(new Jaula(randomPos, tempoRestante, 'J')); break;
+                case 3: itensAtivos.push_back(new Mina(randomPos, tempoRestante, 'M')); break;
+                case 4: itensAtivos.push_back(new Surpresa(randomPos, tempoRestante, 'S')); break;
             }
         }
     }while(mapa[randomPos].getTipo() != '?' || itensAtivos.size() < maxItens);

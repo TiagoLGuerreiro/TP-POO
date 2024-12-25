@@ -18,9 +18,10 @@ private:
     int instante_entre_item;
     int randomPos;
     int max_itens;
+    char tipo;
 
 public:
-    Item(int randomPos, int tempoRestante);
+    Item(int randomPos, int tempoRestante, char tipo);
     virtual ~Item();
 
     virtual void efeito(Caravana& caravana, Jogador &jogador) = 0;
@@ -28,6 +29,7 @@ public:
     bool isAtivo() const; // verifica se está ativo
 
     int getPos() const;
+    char getTipo() const;
 
     static void gerarItem(Grelha &grelha, vector<Item*>& itensAtivos, int max_itens, int tempoRestante);
     static void atualizarItens(vector<Item*>& itensAtivos, int instanteAtual);

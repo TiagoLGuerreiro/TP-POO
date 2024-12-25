@@ -7,12 +7,13 @@
 #include <string>
 #include <sstream>
 #include <functional>
+#include "utils.h"
 
 void mostraInformacoes(int moedas) {
     cout << "Jogador tem " << moedas << " moedas." << endl;
 }
 
-int fase1(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
+int fase1(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<Caravana*> &caravanasAtivas) {
     string opcao;
 
     cout << "======================================" << endl;
@@ -43,7 +44,7 @@ int fase1(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
         grelha.mostrarGrelha();
         mostraInformacoes(jogador.getMoedas());
         Item::gerarItem(grelha, itensAtivos, 5, 20);
-        grelha.mostrarGrelha();
+        Caravana::criar(caravanasAtivas, grelha);
     } else {
         cerr << "Config Errada!" << endl;
         return 1;
@@ -51,12 +52,12 @@ int fase1(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
     return 0;
 }
 
-int fase2(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
+int fase2(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<Caravana*> &caravanasAtivas) {
 
-    string opcaoComando, nome, resto; //nome = nomeFicheiro
+    string opcaoComando, nome, resto, resto2; //nome = nomeFicheiro
     string escolha;
     int nInstantes = 0;
-    int j;
+    int j, k;
 
     do {
 
@@ -72,6 +73,8 @@ int fase2(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
         iss >> opcaoComando;
 
         iss >> resto;
+
+        iss >> resto2;
         //grelha.lerFicheiro("mapa.txt", jogador, itensAtivos); // MUDAR ESTE MAPA.TXT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Ganda otário rafa, estive 1 hora a tentar descobrir porque é que o mapa voltava ao
 // original e era por causa dessa linha de merda
@@ -96,20 +99,52 @@ int fase2(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
             if(jogador.getInstante() % 10 == 0 || jogador.getInstante() == 0)
                 j = 0;
 
+            if(jogador.getInstante() % 20 == 0 || jogador.getInstante() == 0)
+                k = 0;
+
+            int instanteAtual = jogador.getInstante();
             jogador.setInstante(jogador.getInstante() + nInstantes);
-            cout << "Instante Atual - " << jogador.getInstante() << endl;
 
             for (int i = 0; i < nInstantes; ++i) {      // pular 1 instante ou resto instantes.
                 ++j;
+                ++k;
                 Item::atualizarItens(itensAtivos, jogador.getInstante());
-                if(j % 10 == 0){
+                cout << "Instante Atual - " << instanteAtual + i << endl;
+                grelha.mostrarGrelha();
+                if(k == 20){
+                    destruirTodosItens(itensAtivos, grelha);
+                    cout << endl;
+                    k = 0;
+                }
+                if(j == 10){
                     Item::gerarItem(grelha, itensAtivos, 5, 20);
-                    grelha.mostrarGrelha();
+                    cout << endl;
                     j=0;
                 }
             }
+        } else if(opcaoComando == "move") {
+            if(!Caravana::verificarCaravanaID(caravanasAtivas, stoi(resto)))
+                cerr << "ID inserido nao existe" << endl;
+            else {
+                Caravana* caravana = nullptr; //inicializar um ponteiro do tipo caravana sem apontar para nada de inicio
+                for (auto& c : caravanasAtivas) {
+                    if (c->getId() == stoi(resto)) {
+                        caravana = c;
+                        break;
+                    }
+                }
 
-        } else if(opcaoComando == "terminar"){
+                if (caravana) {
+                    int colunas = grelha.getColunas();
+                    int posicaoCaravana = caravana->getPosicao();
+                    int id = caravana->getId();
+                    caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador);  // Move a caravana guardada no ponteiro
+                } else {
+                    cerr << "Caravana nao encontrada." << endl;
+                }
+            }
+
+        }else if(opcaoComando == "terminar"){
             cout << "Escolheu Sair, Ate Uma Proxima." << endl;
             cout << "Pontuacao final - " << endl; // falta adicionar aqui a pontuacao
             UserInterface();
@@ -125,10 +160,11 @@ int fase2(Grelha &grelha, Jogador jogador, vector<Item*> &itensAtivos) {
 
 int UserInterface() {
     Grelha grelha;
-    Jogador jogador;
+    Jogador jogador(0);
     vector<Item*> itensAtivos;
+    vector<Caravana*> caravanasAtivas;
 
-    int n = fase1(grelha, jogador, itensAtivos);
+    int n = fase1(grelha, jogador, itensAtivos, caravanasAtivas);
 
     if (n == 1) {
         cerr << "Erro Na Fase 1." << endl;
@@ -136,7 +172,7 @@ int UserInterface() {
     } else if (n == 2)
         exit(0);
 
-    int m = fase2(grelha, jogador, itensAtivos);
+    int m = fase2(grelha, jogador, itensAtivos, caravanasAtivas);
 
     if (m == 1) {
         cerr << "Erro Na Fase 2." << endl;

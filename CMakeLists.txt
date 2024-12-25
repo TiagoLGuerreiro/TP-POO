@@ -17,4 +17,8 @@ add_executable(TP main.cpp
         UI.h
         UI.cpp
         itensDerivados.cpp
-        itensDerivados.h)
+        itensDerivados.h
+        caravanasTipos.cpp
+        caravanasTipos.h
+        utils.cpp
+        utils.h)

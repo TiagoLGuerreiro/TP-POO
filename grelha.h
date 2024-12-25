@@ -33,6 +33,7 @@ private:
 public:
     Grelha();
 
+    int getColunas() {return colunas;}
     bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item);
 
     void mostrarGrelha() const;
