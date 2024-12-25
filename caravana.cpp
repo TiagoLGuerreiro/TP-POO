@@ -13,8 +13,8 @@
 
 using namespace std;
 
-Caravana::Caravana(int id, int pos, int carga, int agua, int tripulantes) : id(id), capacidadeAgua(agua),
-capacidadeCarga(carga),tripulantes(tripulantes), cargaAtual(0),aguaAtual(agua), pos(pos), destruida(false) {}
+Caravana::Caravana(int id, int pos, int carga, int agua, int tripulantes, const string& tipo) : id(id), capacidadeAgua(agua),
+capacidadeCarga(carga),tripulantes(tripulantes), cargaAtual(0),aguaAtual(agua), pos(pos), destruida(false), tipo(tipo), comportamento(false) {}
 
 void Caravana::reabastecerAgua() {
     aguaAtual = capacidadeAgua;
@@ -22,6 +22,12 @@ void Caravana::reabastecerAgua() {
 
 void Caravana::venderCarga() {
     cargaAtual = 0;
+}
+
+void Caravana::mostrarInfo() const{
+    cout << "A caravana " << id << " e uma caravana " << tipo << endl;
+    cout << "Tem um total de " << tripulantes << " tripulantes com uma carga atual de " << cargaAtual <<
+    " toneladas de mercadoria e " << aguaAtual << " litros de agua." << endl;
 }
 
 bool Caravana::verificarCaravanaID(const vector<Caravana*>& caravanasAtivas, int id) {
@@ -49,7 +55,7 @@ void Caravana::criar(vector<Caravana*>& caravanasAtivas, Grelha &grelha){
     }while(mapa.size() != pos);
 }
 
-void Caravana::mover(int colunas, const string &direcao, Grelha &grelha,int novaPosicao, int id, vector<Item*>& item, Jogador &jogador) {
+void Caravana::mover(int colunas, const string &direcao, Grelha &grelha,int novaPosicao, int id, vector<Item*>& item, Jogador &jogador, vector<Caravana*>& caravanasAtivas) {
     int posicao = novaPosicao;
     int tamanho = grelha.getMapa().size();
 
@@ -83,27 +89,28 @@ void Caravana::mover(int colunas, const string &direcao, Grelha &grelha,int nova
 
                 switch (tipo) {
                     case 'C':
-                        (*it) ->efeito(*this, jogador);
+                        (*it) ->efeito(*this, jogador, caravanasAtivas, grelha);
                         delete *it; // Liberta a memória do item
                         it = item.erase(it); // Remove o ponteiro do vetor e atualiza o iterador
                         break;
                     case 'A':
-                        (*it) ->efeito(*this, jogador);
+                        (*it) ->efeito(*this, jogador, caravanasAtivas, grelha);
                         delete *it;
                         it = item.erase(it);
                         break;
                     case 'J':
-                        (*it) ->efeito(*this, jogador);
+                        (*it) ->efeito(*this, jogador, caravanasAtivas, grelha);
                         delete *it;
                         it = item.erase(it);
                         break;
                     case 'M':
-                        (*it) ->efeito(*this, jogador);
+                        (*it) ->efeito(*this, jogador, caravanasAtivas, grelha);
+
                         delete *it;
                         it = item.erase(it);
                         break;
                     case 'S':
-                        (*it) ->efeito(*this, jogador);
+                        (*it) ->efeito(*this, jogador, caravanasAtivas, grelha);
                         delete *it;
                         it = item.erase(it);
                         break;
@@ -122,6 +129,9 @@ void Caravana::mover(int colunas, const string &direcao, Grelha &grelha,int nova
 // Atualizar a posição no mapa
     grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
     setPosicao(novaPosicao);
-    grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
+    if(!destruida){
+        grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
+    }else
+        grelha.getMapa()[novaPosicao].setTipo('.');
     grelha.mostrarGrelha();
 }

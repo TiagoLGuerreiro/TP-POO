@@ -52,7 +52,7 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<C
     return 0;
 }
 
-int fase2(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<Caravana*> &caravanasAtivas) {
+int fase2(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<Caravana*>& caravanasAtivas) {
 
     string opcaoComando, nome, resto, resto2; //nome = nomeFicheiro
     string escolha;
@@ -89,7 +89,6 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<C
             int moedas = stoi(resto);
             jogador.setMoedas(jogador.getMoedas() + moedas);
             cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas" << endl;
-
         } else if (opcaoComando == "prox") {
             if (resto.empty())
                 nInstantes = 1;
@@ -138,12 +137,42 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item*> &itensAtivos, vector<C
                     int colunas = grelha.getColunas();
                     int posicaoCaravana = caravana->getPosicao();
                     int id = caravana->getId();
-                    caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador);  // Move a caravana guardada no ponteiro
+                    caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador, caravanasAtivas);  // Move a caravana guardada no ponteiro
                 } else {
                     cerr << "Caravana nao encontrada." << endl;
                 }
             }
 
+        }else if(opcaoComando == "caravana"){
+            if (resto.empty() || !Caravana::verificarCaravanaID(caravanasAtivas,stoi(resto)))
+                cerr << "ID da inserido invalido!" << endl;
+            else{
+                int idCaravana = stoi(resto);
+
+                Caravana* caravana = nullptr;
+                for (auto& c : caravanasAtivas) {
+                    if (c->getId() == idCaravana) {
+                        caravana = c;
+                        break;
+                    }
+                }
+                caravana->mostrarInfo();
+            }
+        }else if(opcaoComando == "stop"){
+            if (resto.empty() || !Caravana::verificarCaravanaID(caravanasAtivas,stoi(resto)))
+                cerr << "ID da inserido invalido!" << endl;
+            else {
+                int idCaravana = stoi(resto);
+
+                Caravana* caravana = nullptr;
+                for (auto& c : caravanasAtivas) {
+                    if (c->getId() == idCaravana) {
+                        caravana = c;
+                        break;
+                    }
+                }
+                caravana->setComportamento();
+            }
         }else if(opcaoComando == "terminar"){
             cout << "Escolheu Sair, Ate Uma Proxima." << endl;
             cout << "Pontuacao final - " << endl; // falta adicionar aqui a pontuacao

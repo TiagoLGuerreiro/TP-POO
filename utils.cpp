@@ -21,3 +21,16 @@ void destruirTodosItens(vector<Item*>& itensAtivos, Grelha & grelha) {
     // Limpar o vetor após destruir todos os itens
     itensAtivos.clear();
 }
+
+void destruirCaravana(vector<Caravana*>& caravanasAtivas, int id, int pos, Grelha & grelha) {
+    vector<Posicao>&mapa = grelha.getMapa();
+    for (auto it = caravanasAtivas.begin(); it != caravanasAtivas.end(); ++it) {
+        if ((*it)->getId() == id) { // Localiza a caravana pelo ID
+            (*it)->setDestruida(true);
+            mapa[pos].setTipo('.');
+            delete *it;             // Liberta a memória da caravana
+            caravanasAtivas.erase(it); // Remove a caravana do vetor
+            return;
+        }
+    }
+}

@@ -24,7 +24,7 @@ public:
     Item(int randomPos, int tempoRestante, char tipo);
     virtual ~Item();
 
-    virtual void efeito(Caravana& caravana, Jogador &jogador) = 0;
+    virtual void efeito(Caravana& caravana, Jogador& jogador, vector<Caravana*>& caravanasAtivas, Grelha &grelha) = 0;
     void reduzirTempo(); // reduz tempo restante
     bool isAtivo() const; // verifica se está ativo
 

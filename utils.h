@@ -7,7 +7,9 @@
 #include <vector>
 #include "item.h"
 #include "grelha.h"
+using namespace std;
 
-void destruirTodosItens(std::vector<Item*>& itensAtivos, Grelha &grelha);
+void destruirTodosItens(vector<Item*>& itensAtivos, Grelha &grelha);
+void destruirCaravana(vector<Caravana*>& caravanasAtivas, int id, int pos, Grelha &grelha);
 
 #endif //TP_UTILS_H
