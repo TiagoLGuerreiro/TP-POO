@@ -30,6 +30,7 @@ public:
     void setDestruida(bool status) { destruida = status; }
     bool isDestruida() const { return destruida; }
     int getTripulantes() const { return tripulantes ;}
+    void setTripulantes(int novoTripulantes);
     int getId() const { return id; }
     int getPosicao() const { return pos; }
     void setPosicao(int novaPosicao) {pos = novaPosicao;}

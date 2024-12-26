@@ -34,12 +34,12 @@ public:
     Grelha();
 
     int getColunas() {return colunas;}
+    int getLinhas() {return linhas;}
     bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item);
 
     void mostrarGrelha() const;
 
     int guardarbuffer();
-
     vector<Posicao>& getMapa() { return mapa; }
 };
 

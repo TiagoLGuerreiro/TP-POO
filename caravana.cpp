@@ -20,6 +20,14 @@ void Caravana::reabastecerAgua() {
     aguaAtual = capacidadeAgua;
 }
 
+void Caravana::setTripulantes(int novoTripulantes) {
+    if (novoTripulantes >= 0) {
+        tripulantes = novoTripulantes;
+    } else {
+        cout << "O número de tripulantes não pode ser negativo." << endl;
+    }
+}
+
 void Caravana::venderCarga() {
     cargaAtual = 0;
 }

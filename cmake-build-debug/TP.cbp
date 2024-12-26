@@ -96,6 +96,12 @@
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravana.h">
 			<Option target="TP"/>
 		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravanasTipos.cpp">
+			<Option target="TP"/>
+		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravanasTipos.h">
+			<Option target="TP"/>
+		</Unit>
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/combate.cpp">
 			<Option target="TP"/>
 		</Unit>
@@ -114,6 +120,12 @@
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/item.h">
 			<Option target="TP"/>
 		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/itensDerivados.cpp">
+			<Option target="TP"/>
+		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/itensDerivados.h">
+			<Option target="TP"/>
+		</Unit>
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/jogador.cpp">
 			<Option target="TP"/>
 		</Unit>
@@ -121,6 +133,12 @@
 			<Option target="TP"/>
 		</Unit>
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/main.cpp">
+			<Option target="TP"/>
+		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/utils.cpp">
+			<Option target="TP"/>
+		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/utils.h">
 			<Option target="TP"/>
 		</Unit>
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/CMakeLists.txt">

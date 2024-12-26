@@ -176,6 +176,30 @@ caravana.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/caravana.cpp.s
 .PHONY : caravana.cpp.s
 
+caravanasTipos.obj: caravanasTipos.cpp.obj
+.PHONY : caravanasTipos.obj
+
+# target to build an object file
+caravanasTipos.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/caravanasTipos.cpp.obj
+.PHONY : caravanasTipos.cpp.obj
+
+caravanasTipos.i: caravanasTipos.cpp.i
+.PHONY : caravanasTipos.i
+
+# target to preprocess a source file
+caravanasTipos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/caravanasTipos.cpp.i
+.PHONY : caravanasTipos.cpp.i
+
+caravanasTipos.s: caravanasTipos.cpp.s
+.PHONY : caravanasTipos.s
+
+# target to generate assembly for a file
+caravanasTipos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/caravanasTipos.cpp.s
+.PHONY : caravanasTipos.cpp.s
+
 combate.obj: combate.cpp.obj
 .PHONY : combate.obj
 
@@ -248,6 +272,30 @@ item.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/item.cpp.s
 .PHONY : item.cpp.s
 
+itensDerivados.obj: itensDerivados.cpp.obj
+.PHONY : itensDerivados.obj
+
+# target to build an object file
+itensDerivados.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/itensDerivados.cpp.obj
+.PHONY : itensDerivados.cpp.obj
+
+itensDerivados.i: itensDerivados.cpp.i
+.PHONY : itensDerivados.i
+
+# target to preprocess a source file
+itensDerivados.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/itensDerivados.cpp.i
+.PHONY : itensDerivados.cpp.i
+
+itensDerivados.s: itensDerivados.cpp.s
+.PHONY : itensDerivados.s
+
+# target to generate assembly for a file
+itensDerivados.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/itensDerivados.cpp.s
+.PHONY : itensDerivados.cpp.s
+
 jogador.obj: jogador.cpp.obj
 .PHONY : jogador.obj
 
@@ -296,6 +344,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+utils.obj: utils.cpp.obj
+.PHONY : utils.obj
+
+# target to build an object file
+utils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/utils.cpp.obj
+.PHONY : utils.cpp.obj
+
+utils.i: utils.cpp.i
+.PHONY : utils.i
+
+# target to preprocess a source file
+utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/utils.cpp.i
+.PHONY : utils.cpp.i
+
+utils.s: utils.cpp.s
+.PHONY : utils.s
+
+# target to generate assembly for a file
+utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/utils.cpp.s
+.PHONY : utils.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -311,6 +383,9 @@ help:
 	@echo ... caravana.obj
 	@echo ... caravana.i
 	@echo ... caravana.s
+	@echo ... caravanasTipos.obj
+	@echo ... caravanasTipos.i
+	@echo ... caravanasTipos.s
 	@echo ... combate.obj
 	@echo ... combate.i
 	@echo ... combate.s
@@ -320,12 +395,18 @@ help:
 	@echo ... item.obj
 	@echo ... item.i
 	@echo ... item.s
+	@echo ... itensDerivados.obj
+	@echo ... itensDerivados.i
+	@echo ... itensDerivados.s
 	@echo ... jogador.obj
 	@echo ... jogador.i
 	@echo ... jogador.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... utils.obj
+	@echo ... utils.i
+	@echo ... utils.s
 .PHONY : help
 
 

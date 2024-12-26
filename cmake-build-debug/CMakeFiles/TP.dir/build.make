@@ -166,6 +166,48 @@ CMakeFiles/TP.dir/UI.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/UI.cpp.s"
 	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\UI.cpp -o CMakeFiles\TP.dir\UI.cpp.s
 
+CMakeFiles/TP.dir/itensDerivados.cpp.obj: CMakeFiles/TP.dir/flags.make
+CMakeFiles/TP.dir/itensDerivados.cpp.obj: C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/itensDerivados.cpp
+CMakeFiles/TP.dir/itensDerivados.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TP.dir/itensDerivados.cpp.obj"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/itensDerivados.cpp.obj -MF CMakeFiles\TP.dir\itensDerivados.cpp.obj.d -o CMakeFiles\TP.dir\itensDerivados.cpp.obj -c C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\itensDerivados.cpp
+
+CMakeFiles/TP.dir/itensDerivados.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/itensDerivados.cpp.i"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\itensDerivados.cpp > CMakeFiles\TP.dir\itensDerivados.cpp.i
+
+CMakeFiles/TP.dir/itensDerivados.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/itensDerivados.cpp.s"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\itensDerivados.cpp -o CMakeFiles\TP.dir\itensDerivados.cpp.s
+
+CMakeFiles/TP.dir/caravanasTipos.cpp.obj: CMakeFiles/TP.dir/flags.make
+CMakeFiles/TP.dir/caravanasTipos.cpp.obj: C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravanasTipos.cpp
+CMakeFiles/TP.dir/caravanasTipos.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/TP.dir/caravanasTipos.cpp.obj"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/caravanasTipos.cpp.obj -MF CMakeFiles\TP.dir\caravanasTipos.cpp.obj.d -o CMakeFiles\TP.dir\caravanasTipos.cpp.obj -c C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\caravanasTipos.cpp
+
+CMakeFiles/TP.dir/caravanasTipos.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/caravanasTipos.cpp.i"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\caravanasTipos.cpp > CMakeFiles\TP.dir\caravanasTipos.cpp.i
+
+CMakeFiles/TP.dir/caravanasTipos.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/caravanasTipos.cpp.s"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\caravanasTipos.cpp -o CMakeFiles\TP.dir\caravanasTipos.cpp.s
+
+CMakeFiles/TP.dir/utils.cpp.obj: CMakeFiles/TP.dir/flags.make
+CMakeFiles/TP.dir/utils.cpp.obj: C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/utils.cpp
+CMakeFiles/TP.dir/utils.cpp.obj: CMakeFiles/TP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/TP.dir/utils.cpp.obj"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TP.dir/utils.cpp.obj -MF CMakeFiles\TP.dir\utils.cpp.obj.d -o CMakeFiles\TP.dir\utils.cpp.obj -c C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\utils.cpp
+
+CMakeFiles/TP.dir/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TP.dir/utils.cpp.i"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\utils.cpp > CMakeFiles\TP.dir\utils.cpp.i
+
+CMakeFiles/TP.dir/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TP.dir/utils.cpp.s"
+	"C:\PROGRA~1\JetBrains\CLion 2023.3.4\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\utils.cpp -o CMakeFiles\TP.dir\utils.cpp.s
+
 # Object files for target TP
 TP_OBJECTS = \
 "CMakeFiles/TP.dir/main.cpp.obj" \
@@ -174,7 +216,10 @@ TP_OBJECTS = \
 "CMakeFiles/TP.dir/grelha.cpp.obj" \
 "CMakeFiles/TP.dir/item.cpp.obj" \
 "CMakeFiles/TP.dir/jogador.cpp.obj" \
-"CMakeFiles/TP.dir/UI.cpp.obj"
+"CMakeFiles/TP.dir/UI.cpp.obj" \
+"CMakeFiles/TP.dir/itensDerivados.cpp.obj" \
+"CMakeFiles/TP.dir/caravanasTipos.cpp.obj" \
+"CMakeFiles/TP.dir/utils.cpp.obj"
 
 # External object files for target TP
 TP_EXTERNAL_OBJECTS =
@@ -186,11 +231,14 @@ TP.exe: CMakeFiles/TP.dir/grelha.cpp.obj
 TP.exe: CMakeFiles/TP.dir/item.cpp.obj
 TP.exe: CMakeFiles/TP.dir/jogador.cpp.obj
 TP.exe: CMakeFiles/TP.dir/UI.cpp.obj
+TP.exe: CMakeFiles/TP.dir/itensDerivados.cpp.obj
+TP.exe: CMakeFiles/TP.dir/caravanasTipos.cpp.obj
+TP.exe: CMakeFiles/TP.dir/utils.cpp.obj
 TP.exe: CMakeFiles/TP.dir/build.make
 TP.exe: CMakeFiles/TP.dir/linkLibs.rsp
 TP.exe: CMakeFiles/TP.dir/objects1.rsp
 TP.exe: CMakeFiles/TP.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable TP.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable TP.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TP.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
