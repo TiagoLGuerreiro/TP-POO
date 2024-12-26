@@ -29,12 +29,23 @@ private:
     int linhas;
     int colunas;
     vector<Posicao> mapa; // Vetor unidimensional para o mapa
+    int compraM = 0, vendaM = 0, precoC = 0;
 
 public:
     Grelha();
 
+    //getters
     int getColunas() {return colunas;}
     int getLinhas() {return linhas;}
+    int getCompraM() {return compraM;}
+    int getVendaM() {return vendaM;}
+    int getPrecoC() {return precoC;}
+
+    //setters
+    void setCompraM(int valor);
+    void setVendaM(int valor);
+    void setPrecoC(int valor);
+
     bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item);
 
     void mostrarGrelha() const;

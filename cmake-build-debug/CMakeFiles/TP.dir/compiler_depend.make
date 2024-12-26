@@ -503,6 +503,7 @@ CMakeFiles/TP.dir/caravanasTipos.cpp.obj: C:/Users/rafae/OneDrive/Documentos/Git
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravana.h \
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravanasTipos.h \
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/grelha.h \
+  C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/item.h \
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/jogador.h
 
 CMakeFiles/TP.dir/combate.cpp.obj: C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/combate.cpp \
@@ -1575,6 +1576,7 @@ CMakeFiles/TP.dir/utils.cpp.obj: C:/Users/rafae/OneDrive/Documentos/GitHub/TP-PO
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravana.h \
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravana.h \
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/grelha.h \
   C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/item.h \

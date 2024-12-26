@@ -12,6 +12,19 @@ using namespace std;
 // Construtor padrão
 Grelha::Grelha() : linhas(0), colunas(0){}
 
+
+void Grelha::setCompraM(int valor) {
+    compraM = valor;
+}
+
+void Grelha::setVendaM(int valor) {
+    vendaM = valor;
+}
+
+void Grelha::setPrecoC(int valor) {
+    precoC = valor;
+}
+
 // Ler o ficheiro e carregar a grelha
 bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item) {
     ifstream ficheiro(nomeFicheiro);
@@ -22,7 +35,8 @@ bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<It
 
     string linha;
     string token;
-    int linhasMapa = 0, colunasMapa = 0, moedas = 0, instante_entre_item = 0, duracao_item = 0, max_itens = 0;
+    int linhasMapa = 0, colunasMapa = 0, moedas, instante_entre_item = 0, duracao_item = 0, max_itens = 0,
+            valorPrecoM = 0, valorVendaM = 0, valorCompraC = 0;
 
     // Ler a linha que diz qual o número de linhas
     if (getline(ficheiro, linha)) {
@@ -89,6 +103,27 @@ bool Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<It
                 cout << "Erro ao ler o numero máximo de itens no ficheiro!" << endl;
                 return false;
             }
+        }
+        if (token == "preço_venda_mercadoria") {
+            if (!(ss >> valorVendaM)) {
+                cout << "Erro ao ler o numero de moedas no ficheiro!" << endl;
+                return false;
+            }
+            setVendaM(valorVendaM);
+        }
+        if (token == "preço_compra_mercadoria") {
+            if (!(ss >> valorCompraC)) {
+                cout << "Erro ao ler o numero de moedas no ficheiro!" << endl;
+                return false;
+            }
+            setCompraM(valorCompraC);
+        }
+        if (token == "preço_caravana") {
+            if (!(ss >> valorCompraC)) {
+                cout << "Erro ao ler o numero de moedas no ficheiro!" << endl;
+                return false;
+            }
+            setPrecoC(valorCompraC);
         }
     }
 

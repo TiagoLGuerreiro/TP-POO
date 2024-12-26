@@ -1,6 +1,7 @@
 #include "grelha.h"
 #include "jogador.h"
 #include "item.h"
+#include "caravana.h"
 #include <iostream>
 #include <cstring>
 #include "UI.h"
@@ -11,10 +12,6 @@
 #include <cctype>
 #include <cmath>
 #include <cstdlib>
-
-void mostraInformacoes(int moedas) {
-    cout << "Jogador tem " << moedas << " moedas." << endl;
-}
 
 int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas) {
     string opcao;
@@ -45,7 +42,7 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
 
     if (strcmp(opcao.c_str(), "config mapa.txt") == 0) {
         grelha.mostrarGrelha();
-        mostraInformacoes(jogador.getMoedas());
+        cout << "O Jogador Tem " << jogador.getMoedas() << " Moedas" << endl;
         Item::gerarItem(grelha, itensAtivos, 5, 20);
         Caravana::criar(caravanasAtivas, grelha);
     } else {
@@ -90,7 +87,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
         repetir:;
         if (opcaoComando == "exec") {
             if (resto == "mapa.txt")
-                mostraInformacoes(jogador.getMoedas());
+                cout << "O Jogador Tem " << jogador.getMoedas() << " Moedas" << endl;
             else {
                 cerr << "Ficheiro Invalido." << endl;
                 return 1;
@@ -152,11 +149,12 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                 }
 
                 if (caravana) {
-                    if(i < caravana->getDes()){
+                    if (i < caravana->getDes()) {
                         int colunas = grelha.getColunas();
                         int posicaoCaravana = caravana->getPosicao();
                         int id = caravana->getId();
-                        caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador, caravanasAtivas);  // Move a caravana guardada no ponteiro
+                        caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador,
+                                        caravanasAtivas);  // Move a caravana guardada no ponteiro
 
                         cout << "Instante atual: " << jogador.getInstante() + i << endl;
                         string restoantigo = resto;
@@ -167,16 +165,17 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                         iss >> opcaoComando;
                         iss >> resto;
                         iss >> resto2;
-                        if(resto != restoantigo){
+                        if (resto != restoantigo) {
                             cout << "So pode movimentar 1 caravana por turno" << endl;
                             goto inicioWhile;
                         }
-                        if(opcaoComando == "move") i++;
+                        if (opcaoComando == "move") i++;
                         else i = 0;
 
                         goto repetir;
                     } else {
-                        cout << "A caravana selecionada so pode andar " << caravana->getDes() << " vezes por instante"<< endl;
+                        cout << "A caravana selecionada so pode andar " << caravana->getDes() << " vezes por instante"
+                             << endl;
                         i = 0;
                     }
                 } else {
@@ -249,7 +248,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                             if (caravana) {
                                 caravana->setTripulantes(
                                         floor(caravana->getTripulantes() - (caravana->getTripulantes() * 0.1)));
-                                if(rand() % 4 == 0){ //Os tais 25% chance de destruir
+                                if (rand() % 4 == 0) { //Os tais 25% chance de destruir
                                     destruirCaravana(caravanasAtivas, idCaravana, indiceTempestade, grelha);
                                     cerr << "A Caravana " << idCaravana << " Foi Destruida! Hasta La Vista." << endl;
                                 }
@@ -258,18 +257,91 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     }
                 }
             }
-        } else if (opcaoComando == "auto"){
+        } else if (opcaoComando == "auto") {
             if (empty(resto))
                 cerr << "Adicione o id da caravana que pretende colocar em auto gestao" << endl;
-            else{
-                Caravana* caravana = encontrarCaravanaPorID(caravanasAtivas, stoi(resto));
+            else {
+                Caravana *caravana = encontrarCaravanaPorID(caravanasAtivas, stoi(resto));
                 if (caravana && !caravana->verificarComportamento()) {
                     caravana->setComportamento();
                     caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     cout << "A caravana " << caravana->getId() << " esta agora em modo de autogestao." << endl;
-                }else
+                } else
                     cout << "Caravana ja se encontra em autogestao" << endl;
             }
+
+        } else if (opcaoComando == "precos") {
+            cout << "Comprar Tripulantes 1 Moedas Cada" << endl;
+            cout << "Vender Mercadoria " << grelha.getVendaM() << " Moedas Cada Tonelada" << endl;
+            cout << "Comprar Mercadoria " << grelha.getCompraM() << " Moedas Cada Tonelada" << endl;
+            cout << "Comprar Caravana " << grelha.getPrecoC() << " Moedas Cada" << endl;
+            cout << jogador.getMoedas() << endl;
+
+        } else if (opcaoComando == "vende") {
+            if (empty(resto)) {
+                cerr << "Comando vende Necessita Um Parametro." << endl;
+                goto finalWhile;
+            }
+            int idCaravana = stoi(resto);
+            Caravana *caravana = nullptr;
+
+            for (auto &c: caravanasAtivas) {
+                if (c->getId() == idCaravana) {
+                    caravana = c;
+                    break;
+                }
+            }
+            if (caravana) {
+                if (caravana->getCidade()) {
+                    if(caravana->getCargaAtual() > 0) {
+                        jogador.setMoedas(jogador.getMoedas() + (caravana->getCargaAtual() * grelha.getVendaM()));
+                        cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
+                        caravana->setCarga(0);
+                        cout << "A Caravana Ficou Com " << caravana->getCargaAtual() << " Toneladas De Mercadoria."
+                             << endl;
+                    }else
+                        cout << "A Caravana Encontra-se Sem Mercadoria.";
+                } else
+                    cout << "A Caravana Nao Se Encontra Numa Cidade." << endl;
+            } else
+                cout << "Caravana nao encontrada." << endl;
+
+        } else if (opcaoComando == "compra") {
+            if (empty(resto) || empty(resto2)) {
+                cerr << "Comando Compra Necessita Dois Parametros." << endl;
+                goto finalWhile;
+            }
+
+
+            int idCaravana = stoi(resto);
+            Caravana *caravana = nullptr;
+            int quantidade = stoi(resto2);
+
+            for (auto &c: caravanasAtivas) {
+                if (c->getId() == idCaravana) {
+                    caravana = c;
+                    break;
+                }
+            }
+            if (caravana) {
+                if (caravana->getCidade()) {
+                    if (quantidade <= (caravana->getCapacidadeCarga() - caravana->getCargaAtual())) {
+                        if (jogador.getMoedas() >= (quantidade * grelha.getCompraM())) {
+                            caravana->setCarga(caravana->getCargaAtual() + quantidade);
+                            jogador.setMoedas(jogador.getMoedas() - quantidade * grelha.getCompraM());
+                            cout << "Sobrou " << jogador.getMoedas() << " Moedas Depois Da Compra." << endl;
+                            cout << "A Carga Atual Da Caravana " << idCaravana << " Ficou A "
+                                 << caravana->getCargaAtual() << " Toneladas." << endl;
+                        } else
+                            cout << "Nao Possui Moedas Suficientes." << endl;
+                    } else
+                        cout << "A Caravana Nao Tem A Capacidade Necessaria Para Tal." << endl;
+                } else
+                    cout << "A Caravana Nao Se Encontra Numa Cidade" << endl;
+            } else
+                cout << "Caravana nao encontrada." << endl;
+
+
         } else {
             cerr << "Comando Invalido." << endl;
         }
