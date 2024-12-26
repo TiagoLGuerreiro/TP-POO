@@ -60,9 +60,11 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     string opcaoComando, nome, resto, resto2, resto3; //nome = nomeFicheiro
     string escolha;
     int nInstantes = 0;
-    int j, k;
+    int j, k, i = 0;
 
     do {
+
+        inicioWhile:;
 
         cout << "\nComandos Disponiveis: " << endl;
         cout
@@ -85,7 +87,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
 // original e era por causa dessa linha de merda
 
 //Desculpa Tiago <3
-
+        repetir:;
         if (opcaoComando == "exec") {
             if (resto == "mapa.txt")
                 mostraInformacoes(jogador.getMoedas());
@@ -128,6 +130,14 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     cout << endl;
                     j = 0;
                 }
+
+                /*for (Caravana* caravana : caravanasAtivas) {
+                    if (caravana->estaEmAutoGestao()) {
+                        caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
+                    }
+                }
+                // Atualizar o estado do jogo (água, mercadoria, etc.)
+                atualizarEstado();*/
             }
         } else if (opcaoComando == "move") {
             if (!Caravana::verificarCaravanaID(caravanasAtivas, stoi(resto)))
@@ -142,16 +152,37 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                 }
 
                 if (caravana) {
-                    int colunas = grelha.getColunas();
-                    int posicaoCaravana = caravana->getPosicao();
-                    int id = caravana->getId();
-                    caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador,
-                                    caravanasAtivas);  // Move a caravana guardada no ponteiro
+                    if(i < caravana->getDes()){
+                        int colunas = grelha.getColunas();
+                        int posicaoCaravana = caravana->getPosicao();
+                        int id = caravana->getId();
+                        caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador, caravanasAtivas);  // Move a caravana guardada no ponteiro
+
+                        cout << "Instante atual: " << jogador.getInstante() + i << endl;
+                        string restoantigo = resto;
+                        cout << "\nComandos Disponiveis: prox <n>, move <N> <X>, terminar." << endl;
+                        getline(cin, escolha);
+
+                        istringstream iss(escolha);
+                        iss >> opcaoComando;
+                        iss >> resto;
+                        iss >> resto2;
+                        if(resto != restoantigo){
+                            cout << "So pode movimentar 1 caravana por turno" << endl;
+                            goto inicioWhile;
+                        }
+                        if(opcaoComando == "move") i++;
+                        else i = 0;
+
+                        goto repetir;
+                    } else {
+                        cout << "A caravana selecionada so pode andar " << caravana->getDes() << " vezes por instante"<< endl;
+                        i = 0;
+                    }
                 } else {
                     cerr << "Caravana nao encontrada." << endl;
                 }
             }
-
         } else if (opcaoComando == "caravana") {
             if (resto.empty() || !Caravana::verificarCaravanaID(caravanasAtivas, stoi(resto)))
                 cerr << "ID da inserido invalido!" << endl;
@@ -181,6 +212,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     }
                 }
                 caravana->setComportamento();
+                cout << "Caravana deixou de estar em autogestao" << endl;
             }
         } else if (opcaoComando == "terminar") {
             cout << "Escolheu Sair, Ate Uma Proxima." << endl;
@@ -188,7 +220,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             UserInterface();
         } else if (opcaoComando == "areia") {
             if (empty(resto) || empty(resto2) || empty(resto3)) {
-                cerr << "Comando Areia Requer 3 Numeros Apos Ele" << endl;
+                cerr << "Comando Areia requer 3 valores apos o mesmo" << endl;
                 goto finalWhile;
             }
             int x = stoi(resto);
@@ -202,7 +234,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
 
                     // posição (x1, y1) está dentro dos limites do mapa
                     if (x1 >= 1 && x1 <= grelha.getColunas() && y1 >= 1 && y1 <= grelha.getLinhas()) {
-                        // Calcular o índice para acessar a célula do mapa
+                        // Calcular o índice para aceder a célula do mapa
                         int indiceTempestade = (y1 - 1) * grelha.getColunas() + (x1 - 1);
                         Posicao &p = grelha.getMapa()[indiceTempestade];
                         if (isdigit(p.getTipo())) {
@@ -226,7 +258,18 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     }
                 }
             }
-
+        } else if (opcaoComando == "auto"){
+            if (empty(resto))
+                cerr << "Adicione o id da caravana que pretende colocar em auto gestao" << endl;
+            else{
+                Caravana* caravana = encontrarCaravanaPorID(caravanasAtivas, stoi(resto));
+                if (caravana && !caravana->verificarComportamento()) {
+                    caravana->setComportamento();
+                    caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
+                    cout << "A caravana " << caravana->getId() << " esta agora em modo de autogestao." << endl;
+                }else
+                    cout << "Caravana ja se encontra em autogestao" << endl;
+            }
         } else {
             cerr << "Comando Invalido." << endl;
         }

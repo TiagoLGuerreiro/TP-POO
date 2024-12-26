@@ -3,6 +3,7 @@
 //
 #include "utils.h"
 #include "item.h"
+#include "Caravana.h"
 using namespace std;
 
 void destruirTodosItens(vector<Item*>& itensAtivos, Grelha & grelha) {
@@ -33,4 +34,13 @@ void destruirCaravana(vector<Caravana*>& caravanasAtivas, int id, int pos, Grelh
             return;
         }
     }
+}
+
+Caravana* encontrarCaravanaPorID(const vector<Caravana*>& caravanasAtivas, int id) {
+    for (Caravana* caravana : caravanasAtivas) {
+        if (caravana->getId() == id) {
+            return caravana; // Retorna a caravana correspondente
+        }
+    }
+    return nullptr; // Retorna nullptr se não encontrar
 }

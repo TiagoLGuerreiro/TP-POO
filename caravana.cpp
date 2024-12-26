@@ -13,8 +13,8 @@
 
 using namespace std;
 
-Caravana::Caravana(int id, int pos, int carga, int agua, int tripulantes, const string& tipo) : id(id), capacidadeAgua(agua),
-capacidadeCarga(carga),tripulantes(tripulantes), cargaAtual(0),aguaAtual(agua), pos(pos), destruida(false), tipo(tipo), comportamento(false) {}
+Caravana::Caravana(int id, int pos, int carga, int agua, int tripulantes, int numDes, const string& tipo) : id(id), capacidadeAgua(agua),
+capacidadeCarga(carga),tripulantes(tripulantes), cargaAtual(0),aguaAtual(agua), pos(pos), destruida(false), tipo(tipo), comportamento(false), numDes(numDes) {}
 
 void Caravana::reabastecerAgua() {
     aguaAtual = capacidadeAgua;
@@ -24,7 +24,7 @@ void Caravana::setTripulantes(int novoTripulantes) {
     if (novoTripulantes >= 0) {
         tripulantes = novoTripulantes;
     } else {
-        cout << "O número de tripulantes não pode ser negativo." << endl;
+        cout << "O numero de tripulantes nao pode ser negativo." << endl;
     }
 }
 
@@ -52,7 +52,7 @@ void Caravana::criar(vector<Caravana*>& caravanasAtivas, Grelha &grelha){
     srand(time(0));
     do{
         if(mapa[pos].getTipo() - '0' < 10 && mapa[pos].getTipo() - '0' > 0 ){
-            int tipo = rand() % 3; // Sorteia o tipo de caravana
+            int tipo = rand() % 1; // Sorteia o tipo de caravana
             switch (tipo) {
                 case 0: caravanasAtivas.push_back(new Comercio(mapa[pos].getTipo() - '0', pos)); break;
                 case 1: caravanasAtivas.push_back(new Militar(mapa[pos].getTipo() - '0', pos)); break;
@@ -142,4 +142,117 @@ void Caravana::mover(int colunas, const string &direcao, Grelha &grelha,int nova
     }else
         grelha.getMapa()[novaPosicao].setTipo('.');
     grelha.mostrarGrelha();
+}
+
+void Caravana::moverAleatorio(Grelha& grelha, int novaPosicao, int id){
+    vector<Posicao>&mapa = grelha.getMapa();
+    srand(time(0));
+    int posicao = novaPosicao;
+    int tamanho = grelha.getMapa().size();
+    int colunas = grelha.getColunas();
+    int direcao;
+    do{
+        direcao = rand() % 8; // Sorteia para onde se vai movimentar
+        switch (direcao) {
+            case 0: novaPosicao = (posicao + 1) % tamanho;; break; // Direita
+            case 1: novaPosicao = (posicao - 1 + tamanho) % tamanho; break; // Esquerda
+            case 2: novaPosicao = (posicao - colunas + tamanho) % tamanho; break; // Cima
+            case 3: novaPosicao = (posicao + colunas) % tamanho; break; // Baixo
+            case 4: novaPosicao = (posicao - colunas - 1 + tamanho) % tamanho; break; // Cima-esquerda
+            case 5: novaPosicao = (posicao - colunas + 1 + tamanho) % tamanho; break; // Cima-direita
+            case 6: novaPosicao = (posicao + colunas - 1 + tamanho) % tamanho; break; // Baixo-esquerda
+            case 7: novaPosicao = (posicao + colunas + 1) % tamanho; break; // Baixo-direita
+        }
+    }while(mapa[novaPosicao].getTipo() == '+');
+    grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
+    setPosicao(novaPosicao);
+    grelha.getMapa()[novaPosicao].setTipo(id + '0');
+    grelha.mostrarGrelha();
+}
+
+void Caravana::comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Item*>& itens, vector<Caravana*>& caravanasAtivas) {
+    // Comportamento padrão ou vazio
+}
+
+Caravana* Caravana::encontrarCaravanaProxima(const vector<Caravana*>& caravanasAtivas, Grelha &grelha) const {
+    Caravana* caravanaMaisProxima = nullptr;
+    int menorDistancia = INT_MAX; // Inicializar com a maior distância possível
+
+    for (Caravana* outraCaravana : caravanasAtivas) {
+        if (outraCaravana == this || outraCaravana->verificarComportamento()) {
+            continue; // Ignora se a si mesma ou caravanas em autogestão, continue itera o loop
+        }
+
+        int distancia = abs(outraCaravana->getPosicao() / grelha.getColunas() - this->getPosicao() / grelha.getColunas()) +
+                        abs(outraCaravana->getPosicao() % grelha.getColunas() - this->getPosicao() % grelha.getColunas());
+
+        if (distancia < menorDistancia) { //verificar qual tem uma menor distancia
+            menorDistancia = distancia;
+            caravanaMaisProxima = outraCaravana;
+        }
+    }
+
+    return caravanaMaisProxima;
+}
+
+Item* Caravana::encontrarItemProximo(const vector<Item*>& itens, int alcance, Grelha &grelha) const {
+    Item* itemMaisProximo = nullptr;
+    int menorDistancia = alcance + 1; // Inicializar com um valor maior que o alcance permitido
+
+    for (Item* item : itens) {
+        int distancia = abs(item->getPos() / grelha.getColunas() - this->getPosicao() / grelha.getColunas()) +
+                        abs(item->getPos() % grelha.getColunas() - this->getPosicao() % grelha.getColunas());
+
+        if (distancia <= alcance && distancia < menorDistancia) {
+            menorDistancia = distancia;
+            itemMaisProximo = item;
+        }
+    }
+cout << "Item";
+    return itemMaisProximo;
+}
+
+void Caravana::moverPara(int novaPosicao, Grelha& grelha) {
+    vector<Posicao>& mapa = grelha.getMapa();
+    int colunas = grelha.getColunas();
+
+    // Posições iniciais e finais
+    int posicaoAtual = getPosicao();
+    int linhaAtual = posicaoAtual / colunas;
+    int colunaAtual = posicaoAtual % colunas;
+
+    int linhaDestino = novaPosicao / colunas;
+    int colunaDestino = novaPosicao % colunas;
+
+    // Caminho passo a passo
+    while (abs(linhaAtual - linhaDestino) > 1 || abs(colunaAtual - colunaDestino) > 1) {
+        int novaLinha = linhaAtual;
+        int novaColuna = colunaAtual;
+
+        // Movimentos horizontais e verticais
+        if (linhaAtual < linhaDestino) novaLinha++;
+        else if (linhaAtual > linhaDestino) novaLinha--;
+
+        if (colunaAtual < colunaDestino) novaColuna++;
+        else if (colunaAtual > colunaDestino) novaColuna--;
+
+        // Verifica se o próximo passo é válido
+        int novaPosicao = novaLinha * colunas + novaColuna;
+        if (mapa[novaPosicao].getTipo() == '+') {
+            cout << "Caminho bloqueado por montanhas. Movimento interrompido." << endl;
+            return;
+        }
+
+        // Atualiza a grelha
+        mapa[posicaoAtual].setTipo('.'); // Marca a posição antiga como deserto
+        setPosicao(novaPosicao);
+        mapa[novaPosicao].setTipo(getId() + '0'); // Atualiza o simbolo da caravana na nova posição
+
+        // Atualiza as variáveis para a próxima iteração
+        linhaAtual = novaLinha;
+        colunaAtual = novaColuna;
+        posicaoAtual = novaPosicao;
+
+        grelha.mostrarGrelha();
+    }
 }
