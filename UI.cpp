@@ -128,36 +128,36 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     cout << endl;
                     j = 0;
                 }
-                for (Caravana* caravana : caravanasAtivas) {
+                for (Caravana *caravana: caravanasAtivas) {
                     if (caravana->getTripulantes() <= 0) {
-                        if(!caravana->verificarComportamento())
+                        if (!caravana->verificarComportamento())
                             caravana->setComportamento();
                         caravana->setinstantesSemTripulantes();
-                        if(caravana->getinstantesSemTripulantes() <= 0)
+                        if (caravana->getinstantesSemTripulantes() <= 0)
                             destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
                     }
                     if (caravana->verificarComportamento()) {
                         caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     }
                     caravana->getTipo();
-                    if(caravana->getTipo() == "Secreta")
+                    if (caravana->getTipo() == "Secreta")
                         vezes = 2;
-                    else if(caravana->getTipo() == "Comercio"){
-                        if(caravana->getTripulantes() < 10)
+                    else if (caravana->getTipo() == "Comercio") {
+                        if (caravana->getTripulantes() < 10)
                             vezes = 1;
-                        else if(caravana->getTripulantes() == 0)
+                        else if (caravana->getTripulantes() == 0)
                             vezes = 0;
                         else
                             vezes = 2;
-                    } else if(caravana->getTipo() == "Militar"){
-                        if(caravana->getTripulantes() < 20)
+                    } else if (caravana->getTipo() == "Militar") {
+                        if (caravana->getTripulantes() < 20)
                             vezes = 1;
                         else
                             vezes = 3;
                     }
                     for (int t = 0; t < vezes; t++)
                         caravana->reduzirAgua();
-                    if(caravana->verificarComportamento()){
+                    if (caravana->verificarComportamento()) {
                         for (int l = 0; l < caravana->getDes(); l++)
                             caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     }
@@ -276,11 +276,41 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                                 }
                             }
                             if (caravana) {
-                                caravana->setTripulantes(
-                                        floor(caravana->getTripulantes() - (caravana->getTripulantes() * 0.1)));
-                                if (rand() % 4 == 0) { //Os tais 25% chance de destruir
-                                    destruirCaravana(caravanasAtivas, idCaravana, indiceTempestade, grelha);
-                                    cerr << "A Caravana " << idCaravana << " Foi Destruida! Hasta La Vista." << endl;
+                                //Comercio, se tiver mais de 50% da carga tem 50% de chance de ser destuida, de outra forma
+                                //se tiver menos de 50% tem 25% de chance de ser destruida.
+                                //caso nao seja destruida perde 25% da carga
+                                if (caravana->getTipo() == "Comercio") {
+                                    if (caravana->getCargaAtual() > (caravana->getCapacidadeCarga() / 2)) {
+                                        if (rand() % 2 == 0) {
+                                            destruirCaravana(caravanasAtivas, idCaravana, indiceTempestade, grelha);
+                                            cerr << "A Caravana " << idCaravana << " Foi Destruida! Hasta La Vista."
+                                                 << endl;
+                                        } else {
+                                            caravana->setCarga(floor((caravana->getCargaAtual() -
+                                                                      (caravana->getCargaAtual() / 4))));
+                                        }
+                                    } else {
+                                        if (rand() % 4 == 0) {
+                                            destruirCaravana(caravanasAtivas, idCaravana, indiceTempestade, grelha);
+                                            cerr << "A Caravana " << idCaravana << " Foi Destruida! Hasta La Vista."
+                                                 << endl;
+                                        } else {
+                                            caravana->setCarga(floor((caravana->getCargaAtual() -
+                                                                      (caravana->getCargaAtual() / 4))));
+
+                                        }
+                                    }
+                                    //MILITAR perde 10% da Tripulacao e 33% de chance de ser destruida
+                                } else if (caravana->getTipo() == "Militar") {
+                                    caravana->setTripulantes(
+                                            floor(caravana->getTripulantes() -
+                                                  (caravana->getTripulantes() * 0.1)));
+
+                                    if (rand() % 3 == 0) {
+                                        destruirCaravana(caravanasAtivas, idCaravana, indiceTempestade, grelha);
+                                        cerr << "A Caravana " << idCaravana << " Foi Destruida! Hasta La Vista."
+                                             << endl;
+                                    }
                                 }
                             }
                         }
@@ -322,13 +352,13 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             }
             if (caravana) {
                 if (caravana->getCidade()) {
-                    if(caravana->getCargaAtual() > 0) {
+                    if (caravana->getCargaAtual() > 0) {
                         jogador.setMoedas(jogador.getMoedas() + (caravana->getCargaAtual() * grelha.getVendaM()));
                         cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
                         caravana->setCarga(0);
                         cout << "A Caravana Ficou Com " << caravana->getCargaAtual() << " Toneladas De Mercadoria."
                              << endl;
-                    }else
+                    } else
                         cout << "A Caravana Encontra-se Sem Mercadoria.";
                 } else
                     cout << "A Caravana Nao Se Encontra Numa Cidade." << endl;
