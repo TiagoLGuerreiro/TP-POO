@@ -23,14 +23,19 @@ private:
     int numDes;
     bool cidade = false;
     int instantesSemTripulantes;
+    string ultimoMovimento;
+    int instantesPossiveisSemTripulantes;
 
 public:
-    Caravana(int id, int pos, int cargaAtual, int cargaMax, int aguaMax, int aguaAtual, int tripulantes, int numDes,const string& tipo, bool cidade, int instantesSemTripulantes);
+    Caravana(int id, int pos, int cargaAtual, int cargaMax, int aguaMax, int aguaAtual, int tripulantes, int numDes,const string& tipo, bool cidade, int instantesSemTripulantes, bool comportamento);
 
     virtual ~Caravana() = default;
 
     void setComportamento() {comportamento = !comportamento;}
     bool verificarComportamento() const { return comportamento; }
+
+    void setUltimoMovimento(string movimento) { ultimoMovimento = movimento; }
+    string getUltimoMovimento() const { return ultimoMovimento; }
 
     void setDestruida(bool status) { destruida = status; }
     bool isDestruida() const { return destruida; }
@@ -38,6 +43,7 @@ public:
     int getTripulantes() const { return tripulantes ;}
     void setTripulantes(int novoTripulantes);
     void setinstantesSemTripulantes() { instantesSemTripulantes -= 1;}
+    void setinstantesComTripulantes() { instantesSemTripulantes = instantesPossiveisSemTripulantes;}
     int getinstantesSemTripulantes() { return instantesSemTripulantes;}
 
     int getId() const { return id; }
@@ -54,14 +60,15 @@ public:
     int getCapacidadeCarga(){return capacidadeCarga;}
     void setCarga(int novaCarga){cargaAtual = novaCarga;}
 
-    string getTipo() {return tipo;}
+    string getTipo() const {return tipo;}
     static bool verificarCaravanaID(const vector<Caravana*>& caravanasAtivas, int id);
 
     static void criar(vector<Caravana*>& caravanasAtivas, Grelha &grelha);
+    static void caravanaAparecer(vector<Caravana *> &caravanasAtivas, Grelha &grelha, char tipo);
 
-    virtual void mover(int colunas, const string& direcao, Grelha& grelha, int novaPosicao, int id, vector<Item*>& item, Jogador &jogador, vector<Caravana*> &caravanasAtivas);
+    virtual void mover(int colunas, string& direcao, Grelha& grelha, int novaPosicao, int id, vector<Item*>& item, Jogador &jogador, vector<Caravana*> &caravanasAtivas);
     virtual void comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Item*>& itensAtivos, vector<Caravana*>& caravanasAtivas);
-    Caravana* encontrarCaravanaBarbaraProxima(const vector<Caravana*>& caravanasAtivas, int alcance) const;
+    Caravana* encontrarCaravanaBarbaraProxima(const vector<Caravana*>& caravanasAtivas, Grelha &grelha, int alcance) const;
     void moverAleatorio(Grelha& grelha, int pos, int id);
     void moverPara(int novaPosicao, Grelha& grelha);
 

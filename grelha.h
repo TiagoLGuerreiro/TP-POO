@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "jogador.h"
+#include "buffer.h"
 
 using namespace std;
 
@@ -50,7 +51,7 @@ public:
 
     void mostrarGrelha() const;
 
-    int guardarbuffer();
+    int guardarbuffer() const;
     vector<Posicao>& getMapa() { return mapa; }
 };
 

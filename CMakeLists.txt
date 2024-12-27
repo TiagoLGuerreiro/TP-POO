@@ -21,4 +21,6 @@ add_executable(TP main.cpp
         caravanasTipos.cpp
         caravanasTipos.h
         utils.cpp
-        utils.h)
+        utils.h
+        buffer.h
+        buffer.cpp)

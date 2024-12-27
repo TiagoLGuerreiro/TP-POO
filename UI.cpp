@@ -41,6 +41,7 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     }
 
     if (strcmp(opcao.c_str(), "config mapa.txt") == 0) {
+        grelha.guardarbuffer();
         grelha.mostrarGrelha();
         cout << "O Jogador Tem " << jogador.getMoedas() << " Moedas" << endl;
         Item::gerarItem(grelha, itensAtivos, 5, 20);
@@ -57,11 +58,13 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     string opcaoComando, nome, resto, resto2, resto3; //nome = nomeFicheiro
     string escolha;
     int nInstantes = 0;
-    int j, k, i = 0, vezes, c;
+    int j, k, i = 0, vezes, b;
 
     do {
 
         inicioWhile:;
+
+        resto = "";
 
         cout << "\nComandos Disponiveis: " << endl;
         cout
@@ -108,60 +111,76 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             if (jogador.getInstante() % 20 == 0 || jogador.getInstante() == 0)
                 k = 0;
 
+            if (jogador.getInstante() % 40 == 0 || jogador.getInstante() == 0)
+                b = 0;
+
             int instanteAtual = jogador.getInstante();
             jogador.setInstante(jogador.getInstante() + nInstantes);
 
             for (int i = 0; i < nInstantes; ++i) {      // pular 1 instante ou resto instantes.
                 ++j;
                 ++k;
-                ++c;
+                ++b;
                 Item::atualizarItens(itensAtivos, jogador.getInstante());
                 cout << "Instante Atual - " << instanteAtual + i << endl;
                 grelha.mostrarGrelha();
                 if (k == 20) {
                     destruirTodosItens(itensAtivos, grelha);
-                    cout << endl;
                     k = 0;
                 }
                 if (j == 10) {
                     Item::gerarItem(grelha, itensAtivos, 5, 20);
-                    cout << endl;
                     j = 0;
                 }
-                for (Caravana *caravana: caravanasAtivas) {
-                    if (caravana->getTripulantes() <= 0) {
-                        if (!caravana->verificarComportamento())
-                            caravana->setComportamento();
-                        caravana->setinstantesSemTripulantes();
-                        if (caravana->getinstantesSemTripulantes() <= 0)
-                            destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
-                    }
-                    if (caravana->verificarComportamento()) {
-                        caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
-                    }
-                    caravana->getTipo();
-                    if (caravana->getTipo() == "Secreta")
-                        vezes = 2;
-                    else if (caravana->getTipo() == "Comercio") {
-                        if (caravana->getTripulantes() < 10)
-                            vezes = 1;
-                        else if (caravana->getTripulantes() == 0)
-                            vezes = 0;
-                        else
+                if (b == 40) {
+                    Caravana::caravanaAparecer(caravanasAtivas, grelha, '!');
+                    b = 0;
+                }
+                for (Caravana* caravana : caravanasAtivas) {
+                    if(caravana->getTipo() != "Barbara"){
+                        if (caravana->getTripulantes() <= 0) {
+                            if (!caravana->verificarComportamento() && caravana->getTipo() == "Comercio")
+                                caravana->setComportamento();
+                            if(caravana->getTipo() == "Militar")
+                                caravana->setUltimoMovimento(caravana->getUltimoMovimento());
+                            caravana->setinstantesSemTripulantes();
+                            if(caravana->getinstantesSemTripulantes() <= 0)
+                                destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
+                        } else if(caravana->getTripulantes() > 0)
+                            caravana->setinstantesComTripulantes();
+
+                        if(caravana->getTipo() == "Secreta")
                             vezes = 2;
-                    } else if (caravana->getTipo() == "Militar") {
-                        if (caravana->getTripulantes() < 20)
-                            vezes = 1;
-                        else
-                            vezes = 3;
-                    }
-                    for (int t = 0; t < vezes; t++)
-                        caravana->reduzirAgua();
-                    if (caravana->verificarComportamento()) {
-                        for (int l = 0; l < caravana->getDes(); l++)
-                            caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
+                        else if(caravana->getTipo() == "Comercio"){
+                            if(caravana->getTripulantes() < 10)
+                                vezes = 1;
+                            else if(caravana->getTripulantes() == 0)
+                                vezes = 0;
+                            else
+                                vezes = 2;
+                        } else if(caravana->getTipo() == "Militar"){
+                            if(caravana->getTripulantes() < 20)
+                                vezes = 1;
+                            else
+                                vezes = 3;
+                        }
+                        for (int t = 0; t < vezes; t++)
+                            caravana->reduzirAgua();
+                        if(caravana->verificarComportamento()){
+                            for (int l = 0; l < caravana->getDes(); l++)
+                                caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
+                        }
+
+                        if(caravana->getAguaAtual() <= 0)
+                            caravana->setTripulantes(caravana->getTripulantes() - 1);
+                    } else{
+                        caravana->setinstantesSemTripulantes();
+                        if(caravana->getinstantesSemTripulantes() == 0)
+                            destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
+                        caravana -> comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     }
                 }
+                grelha.mostrarGrelha();
                 // Atualizar o estado do jogo (água, mercadoria, etc.)
                 //atualizarEstado();
             }
@@ -185,7 +204,6 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                         caravana->mover(colunas, resto2, grelha, posicaoCaravana, id, itensAtivos, jogador,
                                         caravanasAtivas);  // Move a caravana guardada no ponteiro
 
-                        cout << "Instante atual: " << jogador.getInstante() + i << endl;
                         string restoantigo = resto;
                         cout << "\nComandos Disponiveis: prox <n>, move <N> <X>, terminar." << endl;
                         getline(cin, escolha);
@@ -199,7 +217,10 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                             goto inicioWhile;
                         }
                         if (opcaoComando == "move") i++;
-                        else i = 0;
+                        else {
+                            i = 0;
+                            resto = "";
+                        }
 
                         goto repetir;
                     } else {
@@ -352,13 +373,13 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             }
             if (caravana) {
                 if (caravana->getCidade()) {
-                    if (caravana->getCargaAtual() > 0) {
+                    if(caravana->getCargaAtual() > 0) {
                         jogador.setMoedas(jogador.getMoedas() + (caravana->getCargaAtual() * grelha.getVendaM()));
                         cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
                         caravana->setCarga(0);
                         cout << "A Caravana Ficou Com " << caravana->getCargaAtual() << " Toneladas De Mercadoria."
                              << endl;
-                    } else
+                    }else
                         cout << "A Caravana Encontra-se Sem Mercadoria.";
                 } else
                     cout << "A Caravana Nao Se Encontra Numa Cidade." << endl;
@@ -444,7 +465,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             if(contaCaravanasNaCidade == 0)
                 cout << "Nao Se Encontram Caravanas Na Cidade." << endl;
 
-        } else {
+        }else {
             cerr << "Comando Invalido." << endl;
         }
 

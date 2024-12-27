@@ -1,6 +1,7 @@
 
 #include "grelha.h"
 #include "jogador.h"
+#include "buffer.h"
 #include "item.h"
 #include <fstream>
 #include <iostream>
@@ -152,15 +153,16 @@ int pointer = 0;
 void copyData(char* data, char* buffer) {
     int i = 0;
     while (buffer[i]) {
-        if (MAX_DATA_SIZE < pointer) {
+        if (pointer < MAX_DATA_SIZE) {
             data[pointer++] = buffer[i];
         } else {
             return;
         }
+        i++;
     }
 }
 
-int Grelha::guardarbuffer(){
+int Grelha::guardarbuffer() const{
     FILE* fileopen = fopen("mapa.txt", "r");
     char data[MAX_DATA_SIZE] = "";
     char buffer[100];
@@ -168,5 +170,9 @@ int Grelha::guardarbuffer(){
     while (fgets(buffer, sizeof(buffer), fileopen)){
         copyData(data, buffer);
     }
+
+    fclose(fileopen);
+    cout << data;
+
     return 1;
 }

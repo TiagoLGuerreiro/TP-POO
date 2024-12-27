@@ -10,9 +10,9 @@ void destruirTodosItens(vector<Item*>& itensAtivos, Grelha & grelha) {
     vector<Posicao>&mapa = grelha.getMapa();
     int pos = 0;
     do{
-       if(mapa[pos].getTipo() == '?')
-           mapa[pos].setTipo('.');
-       pos++;
+        if(mapa[pos].getTipo() == '?')
+            mapa[pos].setTipo('.');
+        pos++;
     }while(mapa.size() != pos);
     // Iterar sobre o vetor e libertar a memória de cada item
     for (auto& item : itensAtivos) {
@@ -38,7 +38,7 @@ void destruirCaravana(vector<Caravana*>& caravanasAtivas, int id, int pos, Grelh
 
 Caravana* encontrarCaravanaPorID(const vector<Caravana*>& caravanasAtivas, int id) {
     for (Caravana* caravana : caravanasAtivas) {
-        if (caravana->getId() == id) {
+        if (caravana->getId() == id && caravana->getTipo() != "Barbara") {
             return caravana; // Retorna a caravana correspondente
         }
     }
