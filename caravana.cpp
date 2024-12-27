@@ -13,29 +13,17 @@
 
 using namespace std;
 
-Caravana::Caravana(int id, int pos, int carga, int agua, int tripulantes, int numDes, const string &tipo, bool cidade) : id(id),
-                                                                                                            capacidadeAgua(
-                                                                                                                    agua),
-                                                                                                            capacidadeCarga(
-                                                                                                                    carga),
-                                                                                                            tripulantes(
-                                                                                                                    tripulantes),
-                                                                                                            cargaAtual(
-                                                                                                                    0),
-                                                                                                            aguaAtual(
-                                                                                                                    agua),
-                                                                                                            pos(pos),
-                                                                                                            destruida(
-                                                                                                                    false),
-                                                                                                            tipo(tipo),
-                                                                                                            comportamento(
-                                                                                                                    false),
-                                                                                                            numDes(numDes),
-                                                                                                            cidade(false){}
+Caravana::Caravana(int id, int pos, int cargaAtual, int cargaMax, int aguaMax, int aguaAtual, int tripulantes, int numDes, const string &tipo, bool cidade, int instantesSemTripulantes) :
+id(id), capacidadeAgua(aguaMax), capacidadeCarga(cargaMax), tripulantes(tripulantes), cargaAtual(cargaAtual),aguaAtual(aguaAtual), pos(pos),
+destruida(false),tipo(tipo),comportamento(false),numDes(numDes),cidade(false), instantesSemTripulantes(instantesSemTripulantes){}
 
 
 void Caravana::reabastecerAgua() {
     aguaAtual = capacidadeAgua;
+}
+
+void Caravana::reduzirAgua() {
+    aguaAtual -= 1;
 }
 
 void Caravana::setTripulantes(int novoTripulantes) {
@@ -70,7 +58,7 @@ void Caravana::criar(vector<Caravana *> &caravanasAtivas, Grelha &grelha) {
     srand(time(0));
     do {
         if (mapa[pos].getTipo() - '0' < 10 && mapa[pos].getTipo() - '0' > 0) {
-            int tipo = rand() % 1; // Sorteia o tipo de caravana
+            int tipo = rand() % 3; // Sorteia o tipo de caravana
             switch (tipo) {
                 case 0:
                     caravanasAtivas.push_back(new Comercio(mapa[pos].getTipo() - '0', pos));
@@ -160,6 +148,7 @@ void Caravana::mover(int colunas, const string &direcao, Grelha &grelha, int nov
              grelha.getMapa()[novaPosicao].getTipo() == 'c') {
         cout << "Entraste numa cidade" << endl;
         cidade = true;
+        reabastecerAgua();
     }
 // Atualizar a posição no mapa
     grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
@@ -182,7 +171,7 @@ void Caravana::moverAleatorio(Grelha &grelha, int novaPosicao, int id) {
         direcao = rand() % 8; // Sorteia para onde se vai movimentar
         switch (direcao) {
             case 0:
-                novaPosicao = (posicao + 1) % tamanho;;
+                novaPosicao = (posicao + 1) % tamanho;
                 break; // Direita
             case 1:
                 novaPosicao = (posicao - 1 + tamanho) % tamanho;
@@ -253,7 +242,6 @@ Item *Caravana::encontrarItemProximo(const vector<Item *> &itens, int alcance, G
             itemMaisProximo = item;
         }
     }
-    cout << "Item";
     return itemMaisProximo;
 }
 
@@ -270,7 +258,7 @@ void Caravana::moverPara(int novaPosicao, Grelha &grelha) {
     int colunaDestino = novaPosicao % colunas;
 
     // Caminho passo a passo
-    while (abs(linhaAtual - linhaDestino) > 1 || abs(colunaAtual - colunaDestino) > 1) {
+    if (abs(linhaAtual - linhaDestino) > 1 || abs(colunaAtual - colunaDestino) > 1) {
         int novaLinha = linhaAtual;
         int novaColuna = colunaAtual;
 
@@ -282,7 +270,7 @@ void Caravana::moverPara(int novaPosicao, Grelha &grelha) {
         else if (colunaAtual > colunaDestino) novaColuna--;
 
         // Verifica se o próximo passo é válido
-        int novaPosicao = novaLinha * colunas + novaColuna;
+        novaPosicao = novaLinha * colunas + novaColuna;
         if (mapa[novaPosicao].getTipo() == '+') {
             cout << "Caminho bloqueado por montanhas. Movimento interrompido." << endl;
             return;

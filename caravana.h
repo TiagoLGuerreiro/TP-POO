@@ -22,9 +22,10 @@ private:
     bool comportamento; //autogestao ou pelo utilizador
     int numDes;
     bool cidade = false;
+    int instantesSemTripulantes;
 
 public:
-    Caravana(int id, int pos, int carga, int agua, int tripulantes, int numDes,const string& tipo, bool cidade);
+    Caravana(int id, int pos, int cargaAtual, int cargaMax, int aguaMax, int aguaAtual, int tripulantes, int numDes,const string& tipo, bool cidade, int instantesSemTripulantes);
 
     virtual ~Caravana() = default;
 
@@ -36,6 +37,8 @@ public:
 
     int getTripulantes() const { return tripulantes ;}
     void setTripulantes(int novoTripulantes);
+    void setinstantesSemTripulantes() { instantesSemTripulantes -= 1;}
+    int getinstantesSemTripulantes() { return instantesSemTripulantes;}
 
     int getId() const { return id; }
     int getDes() const { return numDes; }
@@ -49,9 +52,9 @@ public:
 
     int getCargaAtual(){return cargaAtual;}
     int getCapacidadeCarga(){return capacidadeCarga;}
-
     void setCarga(int novaCarga){cargaAtual = novaCarga;}
 
+    string getTipo() {return tipo;}
     static bool verificarCaravanaID(const vector<Caravana*>& caravanasAtivas, int id);
 
     static void criar(vector<Caravana*>& caravanasAtivas, Grelha &grelha);
@@ -67,6 +70,8 @@ public:
 
 
     void reabastecerAgua();
+    void reduzirAgua();
+    int getAguaAtual() {return aguaAtual;}
     void venderCarga();
 };
 

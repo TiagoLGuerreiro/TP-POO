@@ -57,7 +57,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     string opcaoComando, nome, resto, resto2, resto3; //nome = nomeFicheiro
     string escolha;
     int nInstantes = 0;
-    int j, k, i = 0;
+    int j, k, i = 0, vezes, c;
 
     do {
 
@@ -114,6 +114,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             for (int i = 0; i < nInstantes; ++i) {      // pular 1 instante ou resto instantes.
                 ++j;
                 ++k;
+                ++c;
                 Item::atualizarItens(itensAtivos, jogador.getInstante());
                 cout << "Instante Atual - " << instanteAtual + i << endl;
                 grelha.mostrarGrelha();
@@ -127,14 +128,42 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     cout << endl;
                     j = 0;
                 }
-
-                /*for (Caravana* caravana : caravanasAtivas) {
-                    if (caravana->estaEmAutoGestao()) {
+                for (Caravana* caravana : caravanasAtivas) {
+                    if (caravana->getTripulantes() <= 0) {
+                        if(!caravana->verificarComportamento())
+                            caravana->setComportamento();
+                        caravana->setinstantesSemTripulantes();
+                        if(caravana->getinstantesSemTripulantes() <= 0)
+                            destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
+                    }
+                    if (caravana->verificarComportamento()) {
                         caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
+                    }
+                    caravana->getTipo();
+                    if(caravana->getTipo() == "Secreta")
+                        vezes = 2;
+                    else if(caravana->getTipo() == "Comercio"){
+                        if(caravana->getTripulantes() < 10)
+                            vezes = 1;
+                        else if(caravana->getTripulantes() == 0)
+                            vezes = 0;
+                        else
+                            vezes = 2;
+                    } else if(caravana->getTipo() == "Militar"){
+                        if(caravana->getTripulantes() < 20)
+                            vezes = 1;
+                        else
+                            vezes = 3;
+                    }
+                    for (int t = 0; t < vezes; t++)
+                        caravana->reduzirAgua();
+                    if(caravana->verificarComportamento()){
+                        for (int l = 0; l < caravana->getDes(); l++)
+                            caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     }
                 }
                 // Atualizar o estado do jogo (água, mercadoria, etc.)
-                atualizarEstado();*/
+                //atualizarEstado();
             }
         } else if (opcaoComando == "move") {
             if (!Caravana::verificarCaravanaID(caravanasAtivas, stoi(resto)))
@@ -217,6 +246,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             cout << "Escolheu Sair, Ate Uma Proxima." << endl;
             cout << "Pontuacao final - " << endl; // falta adicionar aqui a pontuacao
             UserInterface();
+
         } else if (opcaoComando == "areia") {
             if (empty(resto) || empty(resto2) || empty(resto3)) {
                 cerr << "Comando Areia requer 3 valores apos o mesmo" << endl;
@@ -264,7 +294,6 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                 Caravana *caravana = encontrarCaravanaPorID(caravanasAtivas, stoi(resto));
                 if (caravana && !caravana->verificarComportamento()) {
                     caravana->setComportamento();
-                    caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     cout << "A caravana " << caravana->getId() << " esta agora em modo de autogestao." << endl;
                 } else
                     cout << "Caravana ja se encontra em autogestao" << endl;
