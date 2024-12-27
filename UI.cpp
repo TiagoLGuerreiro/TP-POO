@@ -401,6 +401,49 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                 cout << "Caravana nao encontrada." << endl;
 
 
+        } else if (opcaoComando == "cidade") {
+            if (empty(resto)) {
+                cerr << "Comando Necessita 1 Parametro." << endl;
+                goto finalWhile;
+            }
+
+            char cidade = resto[0];
+
+            const vector<Posicao> &mapa = grelha.getMapa(); // Obter referência ao mapa
+            bool encontrado = false;
+            int indiceCidade = 0;
+
+            for (size_t i = 0; i < mapa.size(); ++i) {
+                if (mapa[i].getTipo() == cidade) {
+                    encontrado = true;
+                    indiceCidade = i;
+                    break;
+                }
+            }
+
+            int idCaravana, contaCaravanasNaCidade = 0;
+            for (idCaravana = 1; idCaravana < 2; idCaravana++) {
+
+                Caravana *caravana = nullptr;
+
+                for (auto &c: caravanasAtivas) {
+                    if (c->getId() == idCaravana) {
+                        caravana = c;
+                        break;
+                    }
+                }
+                if (caravana) {
+                    cout << caravana->getPosicao() << endl;
+                    cout << indiceCidade << endl;
+                    if (caravana->getPosicao() == indiceCidade && caravana->getCidade()){
+                        cout << "A Caravana " << idCaravana << " Encontra-se Na Cidade " << resto[0] << "." << endl;
+                        contaCaravanasNaCidade++;
+                    }
+                }
+            }
+            if(contaCaravanasNaCidade == 0)
+                cout << "Nao Se Encontram Caravanas Na Cidade." << endl;
+
         } else {
             cerr << "Comando Invalido." << endl;
         }
