@@ -460,23 +460,32 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             if (contaCaravanasNaCidade == 0)
                 cout << "Nao Se Encontram Caravanas Na Cidade." << endl;
 
+            
         } else if (opcaoComando == "saves") {
             if (empty(resto))
                 cerr << "Comando Saves necessita de 1 parametro." << endl;
             else
                 save(resto, bufferData);
+
+
         } else if (opcaoComando == "lists") {
             lists();
+
+
         } else if (opcaoComando == "loads") {
             if (empty(resto))
                 cerr << "Comando Loads necessita de 1 parametro." << endl;
             else
                 loads(resto);
+
+
         } else if (opcaoComando == "dels") {
             if (empty(resto))
                 cerr << "Comando Dels necessita de 1 parametro." << endl;
             else
                 limparBuffer(resto);
+
+
         } else if (opcaoComando == "tripul") {
             if (empty(resto) || empty(resto2)) {
                 cerr << "O Comando Necessita De 2 Parametros" << endl;
@@ -484,11 +493,11 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             }
             int ntripulantes = stoi(resto2);
 
-            if(ntripulantes < 0){
+            if (ntripulantes < 0) {
                 cout << "Nao Pode Comprar Tripulantes Negativos." << endl;
                 goto finalWhile;
             }
-            if(ntripulantes == 0){
+            if (ntripulantes == 0) {
                 cout << "Nao Pode Comprar Zero Tripulantes." << endl;
                 goto finalWhile;
             }
@@ -545,6 +554,62 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     cout << "O Jogador Nao Tem Moedas Necessarias Para A Compra." << endl;
             }
 
+
+        } else if (opcaoComando == "comprac") {
+            if (empty(resto) || empty(resto2)) {
+                cerr << "O Comando Necessita De 2 Parametros." << endl;
+                goto finalWhile;
+            }
+
+            const vector<Posicao> &mapa = grelha.getMapa(); // Obter referência ao mapa
+            bool encontrado = false;
+            int indiceCidade = 0;
+            char cidade = resto[0];
+            char tipo = resto2[0];
+
+            for (size_t i = 0; i < mapa.size(); ++i) {
+                if (mapa[i].getTipo() == cidade) {
+                    encontrado = true;
+                    indiceCidade = i;
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                cout << "Cidade " << cidade << " não encontrada no mapa." << endl;
+                goto finalWhile;
+            }
+
+            if (tipo == 'C' || tipo == 'M' || tipo == 'S') {
+
+                if (jogador.getMoedas() >= grelha.getPrecoC()) {
+
+                    //Verifica Qual O Proximo ID A Utilizar
+                    int maiorId = 0;
+                    for (const auto &c: caravanasAtivas) {
+                        if (c->getId() > maiorId && c->getId() < 10) {
+                            maiorId = c->getId();
+                        }
+                    }
+                    maiorId++;
+
+                    if (maiorId > 9) {
+                        cout << "Atingiu O Numero Maximo De Caravanas ( " << maiorId << " )" << endl;
+                        goto finalWhile;
+                    }
+
+                    //nao sei como adicionar uma caravana, de resto a logica esta criada.
+
+                    Caravana::criar(caravanasAtivas, grelha);
+                    Caravana::caravanaAparecer(caravanasAtivas, grelha, tipo);
+
+                    cout << "Caravana com ID " << maiorId << " criada e atribuída à cidade " << cidade << "." << endl;
+
+                } else
+                    cout << "O Jogador Nao Possui Dinherio Para Comprar A Caravana. Preco: " << grelha.getPrecoC()
+                         << "." << endl;
+            } else
+                cout << "Tipo De Caravana Invalido." << endl;
 
         } else {
             cerr << "Comando Invalido." << endl;
