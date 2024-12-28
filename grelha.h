@@ -47,11 +47,10 @@ public:
     void setVendaM(int valor);
     void setPrecoC(int valor);
 
-    bool lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item);
+    char* lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item*> &item);
 
     void mostrarGrelha() const;
 
-    int guardarbuffer() const;
     vector<Posicao>& getMapa() { return mapa; }
 };
 

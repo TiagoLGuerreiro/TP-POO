@@ -193,69 +193,162 @@ void Caravana::mover(int colunas, string &direcao, Grelha &grelha, int novaPosic
         cidade = true;
         reabastecerAgua();
     }
-// Atualizar a posição no mapa
-    grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
+
+    if(grelha.getMapa()[posicao].getTipo() == 'a' || grelha.getMapa()[posicao].getTipo() == 'b' ||
+              grelha.getMapa()[posicao].getTipo() == 'c'){
+
+        char tipoAtual = grelha.getMapa()[posicao].getTipo(); // Obtém o tipo atual
+        grelha.getMapa()[posicao].setTipo(tipoAtual); // Marca a posição antiga como deserto
+        cout << "Saiste da cidade!" << endl;
+        grelha.getMapa()[novaPosicao].setTipo(id + '0');
+        cidade = false;
+    }else
+        grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
+
+    // Atualizar a posição no mapa
     setPosicao(novaPosicao);
     setUltimoMovimento(direcao);
-    if (!destruida) {
-        grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
-    } else
-        grelha.getMapa()[novaPosicao].setTipo('.');
+    if(!cidade){
+        if (!destruida)
+             grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
+        else
+            grelha.getMapa()[novaPosicao].setTipo('.');
+    }
     grelha.mostrarGrelha();
 }
 
-void Caravana::moverAleatorio(Grelha &grelha, int novaPosicao, int id) {
+void Caravana::moverAleatorio(Grelha &grelha, int novaPosicao, int id, vector<Item *> &item, Jogador &jogador, vector<Caravana *> &caravanasAtivas) {
     vector<Posicao> &mapa = grelha.getMapa();
     srand(time(0));
     int posicao = novaPosicao;
     int tamanho = grelha.getMapa().size();
     int colunas = grelha.getColunas();
     int direcao;
+    string direcao2;
     do {
         direcao = rand() % 8; // Sorteia para onde se vai movimentar
         switch (direcao) {
             case 0:
                 novaPosicao = (posicao + 1) % tamanho;
                 setUltimoMovimento("D");
+                direcao2 = "D";
                 break; // Direita
             case 1:
                 novaPosicao = (posicao - 1 + tamanho) % tamanho;
                 setUltimoMovimento("E");
+                direcao2 = "E";
                 break; // Esquerda
             case 2:
                 novaPosicao = (posicao - colunas + tamanho) % tamanho;
                 setUltimoMovimento("C");
+                direcao2 = "C";
                 break; // Cima
             case 3:
                 novaPosicao = (posicao + colunas) % tamanho;
                 setUltimoMovimento("B");
+                direcao2 = "B";
                 break; // Baixo
             case 4:
                 novaPosicao = (posicao - colunas - 1 + tamanho) % tamanho;
                 setUltimoMovimento("CE");
+                direcao2 = "CE";
                 break; // Cima-esquerda
             case 5:
                 novaPosicao = (posicao - colunas + 1 + tamanho) % tamanho;
                 setUltimoMovimento("CD");
+                direcao2 = "CD";
                 break; // Cima-direita
             case 6:
                 novaPosicao = (posicao + colunas - 1 + tamanho) % tamanho;
                 setUltimoMovimento("BE");
+                direcao2 = "BE";
                 break; // Baixo-esquerda
             case 7:
                 novaPosicao = (posicao + colunas + 1) % tamanho;
                 setUltimoMovimento("BD");
+                direcao2 = "BD";
                 break; // Baixo-direita
         }
     } while (mapa[novaPosicao].getTipo() == '+');
 
-    grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
-    setPosicao(novaPosicao);
+    if (grelha.getMapa()[novaPosicao].getTipo() == '?') {
+        cout << "Achaste um item!" << endl;
 
-    if(getTipo() != "Barbara")
-        mapa[novaPosicao].setTipo(getId() + '0'); // Atualiza o simbolo da caravana na nova posição
-    else
-        mapa[novaPosicao].setTipo('!'); // Atualiza o simbolo dos barbaros na nova posição
+        for (auto it = item.begin(); it != item.end(); ++it) { // Iterador
+            if ((*it)->getPos() == novaPosicao) {
+                char tipo = (*it)->getTipo();
+
+                switch (tipo) {
+                    case 'C':
+                        (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                        delete *it; // Liberta a memória do item
+                        it = item.erase(it); // Remove o ponteiro do vetor e atualiza o iterador
+                        break;
+                    case 'A':
+                        (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                        delete *it;
+                        it = item.erase(it);
+                        break;
+                    case 'J':
+                        (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                        delete *it;
+                        it = item.erase(it);
+                        break;
+                    case 'M':
+                        (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+
+                        delete *it;
+                        it = item.erase(it);
+                        break;
+                    case 'S':
+                        (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                        delete *it;
+                        it = item.erase(it);
+                        break;
+                }
+                break; // Sai do loop após processar o item
+            }
+        }
+    } else if (grelha.getMapa()[novaPosicao].getTipo() == '+' && getTipo() != "Barbara") {
+        cout << "Achaste uma montanha, nao te consegues mover nessa direcao" << endl;
+        return;
+    } else if (grelha.getMapa()[novaPosicao].getTipo() == '+' && getTipo() == "Barbara") {
+        return;
+    } else if (grelha.getMapa()[novaPosicao].getTipo() == '!' && getTipo() != "Barbara")
+        cout << "Achaste uma caravana Barbara" << endl;
+    else if (grelha.getMapa()[novaPosicao].getTipo() == 'a' || grelha.getMapa()[novaPosicao].getTipo() == 'b' ||
+             grelha.getMapa()[novaPosicao].getTipo() == 'c') {
+        if(getTipo() != "Barbara")
+            cout << "Entraste numa cidade" << endl;
+        cidade = true;
+        reabastecerAgua();
+    }
+
+    if(grelha.getMapa()[posicao].getTipo() == 'a' || grelha.getMapa()[posicao].getTipo() == 'b' ||
+       grelha.getMapa()[posicao].getTipo() == 'c'){
+
+        char tipoAtual = grelha.getMapa()[posicao].getTipo(); // Obtém o tipo atual
+        grelha.getMapa()[posicao].setTipo(tipoAtual); // Marca a posição antiga como deserto
+        if(getTipo() != "Barbara"){
+            cout << "Saiste da cidade!" << endl;
+            grelha.getMapa()[novaPosicao].setTipo(id + '0');
+        } else
+            grelha.getMapa()[novaPosicao].setTipo('!');
+        cidade = false;
+    }else
+        grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
+
+    setPosicao(novaPosicao);
+    setUltimoMovimento(direcao2);
+
+    if(!cidade){
+        if (!destruida && getTipo() != "Barbara")
+            grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
+        else if (!destruida && getTipo() != "Barbara")
+            grelha.getMapa()[novaPosicao].setTipo('!');
+        else
+            grelha.getMapa()[novaPosicao].setTipo('.');
+    }
 }
 
 void Caravana::comportamentoAutonomo(Grelha &grelha, Jogador &jogador, vector<Item *> &itens,
@@ -337,7 +430,7 @@ Item *Caravana::encontrarItemProximo(const vector<Item *> &itens, int alcance, G
     return itemMaisProximo;
 }
 
-void Caravana::moverPara(int novaPosicao, Grelha &grelha) {
+void Caravana::moverPara(int novaPosicao, Grelha &grelha, vector<Item *> &item, Jogador &jogador, vector<Caravana *> &caravanasAtivas) {
     vector<Posicao> &mapa = grelha.getMapa();
     int colunas = grelha.getColunas();
 
@@ -353,29 +446,94 @@ void Caravana::moverPara(int novaPosicao, Grelha &grelha) {
     if (abs(linhaAtual - linhaDestino) > 1 || abs(colunaAtual - colunaDestino) > 1) {
         int novaLinha = linhaAtual;
         int novaColuna = colunaAtual;
-
+    string direcao;
         // Movimentos horizontais e verticais
-        if (linhaAtual < linhaDestino) novaLinha++;
-        else if (linhaAtual > linhaDestino) novaLinha--;
+        if (linhaAtual < linhaDestino) { novaLinha++; direcao = "C";}
+        else if (linhaAtual > linhaDestino) { novaLinha--; direcao = "B";}
 
-        if (colunaAtual < colunaDestino) novaColuna++;
-        else if (colunaAtual > colunaDestino) novaColuna--;
+        if (colunaAtual < colunaDestino) { novaColuna++; direcao = "D";}
+        else if (colunaAtual > colunaDestino) { novaColuna--; direcao = "E";}
 
         // Verifica se o próximo passo é válido
         novaPosicao = novaLinha * colunas + novaColuna;
-        if (mapa[novaPosicao].getTipo() == '+') {
-            cout << "Caminho bloqueado por montanhas. Movimento interrompido." << endl;
+        if (grelha.getMapa()[novaPosicao].getTipo() == '?') {
+            cout << "Achaste um item!" << endl;
+
+            for (auto it = item.begin(); it != item.end(); ++it) { // Iterador
+                if ((*it)->getPos() == novaPosicao) {
+                    char tipo = (*it)->getTipo();
+
+                    switch (tipo) {
+                        case 'C':
+                            (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                            delete *it; // Liberta a memória do item
+                            it = item.erase(it); // Remove o ponteiro do vetor e atualiza o iterador
+                            break;
+                        case 'A':
+                            (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                            delete *it;
+                            it = item.erase(it);
+                            break;
+                        case 'J':
+                            (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                            delete *it;
+                            it = item.erase(it);
+                            break;
+                        case 'M':
+                            (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+
+                            delete *it;
+                            it = item.erase(it);
+                            break;
+                        case 'S':
+                            (*it)->efeito(*this, jogador, caravanasAtivas, grelha);
+                            delete *it;
+                            it = item.erase(it);
+                            break;
+                    }
+                    break; // Sai do loop após processar o item
+                }
+            }
+        } else if (grelha.getMapa()[novaPosicao].getTipo() == '+' && getTipo() != "Barbara") {
+            cout << "Achaste uma montanha, nao te consegues mover nessa direcao" << endl;
             return;
+        } else if (grelha.getMapa()[novaPosicao].getTipo() == '+' && getTipo() == "Barbara") {
+            return;
+        } else if (grelha.getMapa()[novaPosicao].getTipo() == '!' && getTipo() != "Barbara")
+            cout << "Achaste uma caravana Barbara" << endl;
+        else if (grelha.getMapa()[novaPosicao].getTipo() == 'a' || grelha.getMapa()[novaPosicao].getTipo() == 'b' ||
+                 grelha.getMapa()[novaPosicao].getTipo() == 'c') {
+            if(getTipo() != "Barbara")
+                cout << "Entraste numa cidade" << endl;
+            cidade = true;
+            reabastecerAgua();
         }
 
-        // Atualiza a grelha
-        mapa[posicaoAtual].setTipo('.'); // Marca a posição antiga como deserto
-        setPosicao(novaPosicao);
-        if(getTipo() != "Barbara")
-            mapa[novaPosicao].setTipo(getId() + '0'); // Atualiza o simbolo da caravana na nova posição
-        else
-            mapa[novaPosicao].setTipo('!'); // Atualiza o simbolo dos barbaros na nova posição
+        if(grelha.getMapa()[posicaoAtual].getTipo() == 'a' || grelha.getMapa()[posicaoAtual].getTipo() == 'b' ||
+           grelha.getMapa()[posicaoAtual].getTipo() == 'c'){
 
+            char tipoAtual = grelha.getMapa()[posicaoAtual].getTipo(); // Obtém o tipo atual
+            grelha.getMapa()[posicaoAtual].setTipo(tipoAtual); // Marca a posição antiga como deserto
+            if(getTipo() != "Barbara"){
+                cout << "Saiste da cidade!" << endl;
+                grelha.getMapa()[novaPosicao].setTipo(id + '0');
+            } else
+                grelha.getMapa()[novaPosicao].setTipo('!');
+            cidade = false;
+        }else
+            grelha.getMapa()[posicaoAtual].setTipo('.'); // Marca a posição antiga como deserto
+
+        setPosicao(novaPosicao);
+        setUltimoMovimento(direcao);
+
+        if(!cidade){
+            if (!destruida && getTipo() != "Barbara")
+                grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
+            else if (!destruida && getTipo() != "Barbara")
+                grelha.getMapa()[novaPosicao].setTipo('!');
+            else
+                grelha.getMapa()[novaPosicao].setTipo('.');
+        }
         cout << endl;
     }
 }

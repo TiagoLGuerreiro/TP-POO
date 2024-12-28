@@ -69,8 +69,8 @@ public:
     virtual void mover(int colunas, string& direcao, Grelha& grelha, int novaPosicao, int id, vector<Item*>& item, Jogador &jogador, vector<Caravana*> &caravanasAtivas);
     virtual void comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Item*>& itensAtivos, vector<Caravana*>& caravanasAtivas);
     Caravana* encontrarCaravanaBarbaraProxima(const vector<Caravana*>& caravanasAtivas, Grelha &grelha, int alcance) const;
-    void moverAleatorio(Grelha& grelha, int pos, int id);
-    void moverPara(int novaPosicao, Grelha& grelha);
+    void moverAleatorio(Grelha &grelha, int novaPosicao, int id, vector<Item *> &item, Jogador &jogador, vector<Caravana *> &caravanasAtivas);
+    void moverPara(int novaPosicao, Grelha &grelha, vector<Item *> &item, Jogador &jogador, vector<Caravana *> &caravanasAtivas);
 
     Caravana* encontrarCaravanaProxima(const vector<Caravana*>& caravanasAtivas, Grelha &grelha) const;
     Item* encontrarItemProximo(const vector<Item*>& itens, int alcance, Grelha &grelha) const;

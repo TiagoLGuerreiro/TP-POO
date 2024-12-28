@@ -16,16 +16,16 @@ void Comercio::mover(int colunas, string& direcao, Grelha& grelha, int pos, int 
 
 void Comercio::comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Item*>& itens, vector<Caravana*>& caravanasAtivas) {
     if (getTripulantes() == 0) {
-        moverAleatorio(grelha, getPosicao(), getId());
+        moverAleatorio(grelha, getPosicao(), getId(), itens, jogador, caravanasAtivas);
         return;
     }
 
     if (Item* itemProximo = encontrarItemProximo(itens, 2, grelha)) { // Alcance de 2 para itens
-        moverPara(itemProximo->getPos(), grelha); // Move para pegar o item
+        moverPara(itemProximo->getPos(), grelha, itens, jogador, caravanasAtivas); // Move para pegar o item
     } if (Caravana* caravanaProxima = encontrarCaravanaProxima(caravanasAtivas, grelha)) {
-        moverPara(caravanaProxima->getPosicao(), grelha); // Move em direção da caravana mais próxima
+        moverPara(caravanaProxima->getPosicao(), grelha, itens, jogador, caravanasAtivas); // Move em direção da caravana mais próxima
     } else {
-        moverAleatorio(grelha, getPosicao(), getId()); // Caso contrário, move-se aleatoriamente
+        moverAleatorio(grelha, getPosicao(), getId(), itens, jogador, caravanasAtivas); // Caso contrário, move-se aleatoriamente
     }
 }
 
@@ -42,7 +42,7 @@ void Militar::comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Ite
     }else{
         Caravana* barbaraProxima = encontrarCaravanaBarbaraProxima(caravanasAtivas, grelha, 6); // Encontrar bárbara próxima
         if (barbaraProxima) {
-            moverPara(barbaraProxima->getPosicao(), grelha); // Persegue bárbara
+            moverPara(barbaraProxima->getPosicao(), grelha, itens, jogador, caravanasAtivas); // Persegue bárbara
         } else {
             // Fica parada
         }
@@ -60,8 +60,8 @@ Barbara::Barbara(int id, int pos) : Caravana(id, pos, 0, 0, 0, 0, 40, 1, "Barbar
 void Barbara::comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Item*>& itens, vector<Caravana*>& caravanasAtivas) {
     Caravana* caravanaProxima = encontrarCaravanaBarbaraProxima(caravanasAtivas, grelha, 8); // Encontrar caravana próxima
     if (caravanaProxima) {
-        moverPara(caravanaProxima->getPosicao(), grelha); // Persegue caravana
+        moverPara(caravanaProxima->getPosicao(), grelha, itens, jogador, caravanasAtivas); // Persegue caravana
     } else {
-        moverAleatorio(grelha, getPosicao(), getId());
+        moverAleatorio(grelha, getPosicao(), getId(), itens, jogador, caravanasAtivas);
     }
 }

@@ -12,8 +12,11 @@
 #include <cctype>
 #include <cmath>
 #include <cstdlib>
+#include "buffer.h"
+#define MAX_DATA_SIZE 1000
+char* data = new char[MAX_DATA_SIZE]();
 
-int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas) {
+int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas, char* &bufferData) {
     string opcao;
 
     cout << "======================================" << endl;
@@ -25,7 +28,6 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     string comando, nomeFicheiro;
 
     iss >> comando;
-
     if (comando == "config")
         iss >> nomeFicheiro;
     else if (comando == "sair") {
@@ -35,13 +37,12 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
         cerr << "Comando Invalido" << endl;
         return 1;
     }
-
-    if (!grelha.lerFicheiro(nomeFicheiro, jogador, itensAtivos)) {
+    bufferData = grelha.lerFicheiro(nomeFicheiro, jogador, itensAtivos);
+    if (bufferData == nullptr) {
         return 1;
     }
 
     if (strcmp(opcao.c_str(), "config mapa.txt") == 0) {
-        grelha.guardarbuffer();
         grelha.mostrarGrelha();
         cout << "O Jogador Tem " << jogador.getMoedas() << " Moedas" << endl;
         Item::gerarItem(grelha, itensAtivos, 5, 20);
@@ -53,8 +54,7 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     return 0;
 }
 
-int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas) {
-
+int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas, char* bufferData) {
     string opcaoComando, nome, resto, resto2, resto3; //nome = nomeFicheiro
     string escolha;
     int nInstantes = 0;
@@ -465,6 +465,12 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             if(contaCaravanasNaCidade == 0)
                 cout << "Nao Se Encontram Caravanas Na Cidade." << endl;
 
+        } else if (opcaoComando == "saves") {
+            if (empty(resto))
+                cerr << "Comando Saves necessita de 1 parametro." << endl;
+            else{
+                save(resto, bufferData);
+            }
         }else {
             cerr << "Comando Invalido." << endl;
         }
@@ -481,8 +487,8 @@ int UserInterface() {
     Jogador jogador(0);
     vector<Item *> itensAtivos;
     vector<Caravana *> caravanasAtivas;
-
-    int n = fase1(grelha, jogador, itensAtivos, caravanasAtivas);
+    char* bufferData = nullptr;
+    int n = fase1(grelha, jogador, itensAtivos, caravanasAtivas, bufferData);
 
     if (n == 1) {
         cerr << "Erro Na Fase 1." << endl;
@@ -490,7 +496,7 @@ int UserInterface() {
     } else if (n == 2)
         exit(0);
 
-    int m = fase2(grelha, jogador, itensAtivos, caravanasAtivas);
+    int m = fase2(grelha, jogador, itensAtivos, caravanasAtivas, bufferData);
 
     if (m == 1) {
         cerr << "Erro Na Fase 2." << endl;
