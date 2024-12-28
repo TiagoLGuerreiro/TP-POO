@@ -105,6 +105,7 @@ CMakeFiles/TP.dir/main.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/charconv.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_string.tcc \
  C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\jogador.h \
+ C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\buffer.h \
  C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\item.h \
  C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\caravana.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \

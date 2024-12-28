@@ -152,5 +152,6 @@ CMakeFiles/TP.dir/itensDerivados.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
  C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\grelha.h \
+ C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\buffer.h \
  C:\Users\rafae\OneDrive\Documentos\GitHub\TP-POO\utils.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.3.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ctime

@@ -90,6 +90,12 @@
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/UI.h">
 			<Option target="TP"/>
 		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/buffer.cpp">
+			<Option target="TP"/>
+		</Unit>
+		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/buffer.h">
+			<Option target="TP"/>
+		</Unit>
 		<Unit filename="C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravana.cpp">
 			<Option target="TP"/>
 		</Unit>

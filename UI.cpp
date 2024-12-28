@@ -13,10 +13,12 @@
 #include <cmath>
 #include <cstdlib>
 #include "buffer.h"
-#define MAX_DATA_SIZE 1000
-char* data = new char[MAX_DATA_SIZE]();
 
-int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas, char* &bufferData) {
+#define MAX_DATA_SIZE 1000
+char *data = new char[MAX_DATA_SIZE]();
+
+int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas,
+          char *&bufferData) {
     string opcao;
 
     cout << "======================================" << endl;
@@ -54,7 +56,8 @@ int fase1(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
     return 0;
 }
 
-int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas, char* bufferData) {
+int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<Caravana *> &caravanasAtivas,
+          char *bufferData) {
     string opcaoComando, nome, resto, resto2, resto3; //nome = nomeFicheiro
     string escolha;
     int nInstantes = 0;
@@ -136,48 +139,48 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                     Caravana::caravanaAparecer(caravanasAtivas, grelha, '!');
                     b = 0;
                 }
-                for (Caravana* caravana : caravanasAtivas) {
-                    if(caravana->getTipo() != "Barbara"){
+                for (Caravana *caravana: caravanasAtivas) {
+                    if (caravana->getTipo() != "Barbara") {
                         if (caravana->getTripulantes() <= 0) {
                             if (!caravana->verificarComportamento() && caravana->getTipo() == "Comercio")
                                 caravana->setComportamento();
-                            if(caravana->getTipo() == "Militar")
+                            if (caravana->getTipo() == "Militar")
                                 caravana->setUltimoMovimento(caravana->getUltimoMovimento());
                             caravana->setinstantesSemTripulantes();
-                            if(caravana->getinstantesSemTripulantes() <= 0)
+                            if (caravana->getinstantesSemTripulantes() <= 0)
                                 destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
-                        } else if(caravana->getTripulantes() > 0)
+                        } else if (caravana->getTripulantes() > 0)
                             caravana->setinstantesComTripulantes();
 
-                        if(caravana->getTipo() == "Secreta")
+                        if (caravana->getTipo() == "Secreta")
                             vezes = 2;
-                        else if(caravana->getTipo() == "Comercio"){
-                            if(caravana->getTripulantes() < 10)
+                        else if (caravana->getTipo() == "Comercio") {
+                            if (caravana->getTripulantes() < 10)
                                 vezes = 1;
-                            else if(caravana->getTripulantes() == 0)
+                            else if (caravana->getTripulantes() == 0)
                                 vezes = 0;
                             else
                                 vezes = 2;
-                        } else if(caravana->getTipo() == "Militar"){
-                            if(caravana->getTripulantes() < 20)
+                        } else if (caravana->getTipo() == "Militar") {
+                            if (caravana->getTripulantes() < 20)
                                 vezes = 1;
                             else
                                 vezes = 3;
                         }
                         for (int t = 0; t < vezes; t++)
                             caravana->reduzirAgua();
-                        if(caravana->verificarComportamento()){
+                        if (caravana->verificarComportamento()) {
                             for (int l = 0; l < caravana->getDes(); l++)
                                 caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                         }
 
-                        if(caravana->getAguaAtual() <= 0)
+                        if (caravana->getAguaAtual() <= 0)
                             caravana->setTripulantes(caravana->getTripulantes() - 1);
-                    } else{
+                    } else {
                         caravana->setinstantesSemTripulantes();
-                        if(caravana->getinstantesSemTripulantes() == 0)
+                        if (caravana->getinstantesSemTripulantes() == 0)
                             destruirCaravana(caravanasAtivas, caravana->getId(), caravana->getPosicao(), grelha);
-                        caravana -> comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
+                        caravana->comportamentoAutonomo(grelha, jogador, itensAtivos, caravanasAtivas);
                     }
                 }
                 grelha.mostrarGrelha();
@@ -373,13 +376,13 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             }
             if (caravana) {
                 if (caravana->getCidade()) {
-                    if(caravana->getCargaAtual() > 0) {
+                    if (caravana->getCargaAtual() > 0) {
                         jogador.setMoedas(jogador.getMoedas() + (caravana->getCargaAtual() * grelha.getVendaM()));
                         cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
                         caravana->setCarga(0);
                         cout << "A Caravana Ficou Com " << caravana->getCargaAtual() << " Toneladas De Mercadoria."
                              << endl;
-                    }else
+                    } else
                         cout << "A Caravana Encontra-se Sem Mercadoria.";
                 } else
                     cout << "A Caravana Nao Se Encontra Numa Cidade." << endl;
@@ -445,14 +448,16 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             int contaCaravanasNaCidade = 0;
             Caravana *caravana = nullptr;
             for (auto &c: caravanasAtivas) {
-                    if (c->getPosicao() == indiceCidade) {
-                        caravana = c;
-                        if (caravana->getPosicao() == indiceCidade && caravana->getCidade()){
-                            cout << "A Caravana " << caravana->getId() << " encontra-se Na Cidade " << resto[0] << "." << endl;
-                            contaCaravanasNaCidade++;
-                        }
+                if (c->getPosicao() == indiceCidade) {
+                    caravana = c;
+                    if (caravana->getPosicao() == indiceCidade && caravana->getCidade()) {
+                        cout << "A Caravana " << caravana->getId() << " encontra-se Na Cidade " << resto[0] << "."
+                             << endl;
+                        contaCaravanasNaCidade++;
                     }
-            } if(contaCaravanasNaCidade == 0)
+                }
+            }
+            if (contaCaravanasNaCidade == 0)
                 cout << "Nao Se Encontram Caravanas Na Cidade." << endl;
 
         } else if (opcaoComando == "saves") {
@@ -460,19 +465,88 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                 cerr << "Comando Saves necessita de 1 parametro." << endl;
             else
                 save(resto, bufferData);
-        }else if (opcaoComando == "lists") {
+        } else if (opcaoComando == "lists") {
             lists();
-        }else if (opcaoComando == "loads") {
+        } else if (opcaoComando == "loads") {
             if (empty(resto))
                 cerr << "Comando Loads necessita de 1 parametro." << endl;
             else
                 loads(resto);
-        }else if (opcaoComando == "dels") {
+        } else if (opcaoComando == "dels") {
             if (empty(resto))
                 cerr << "Comando Dels necessita de 1 parametro." << endl;
             else
                 limparBuffer(resto);
-        }else {
+        } else if (opcaoComando == "tripul") {
+            if (empty(resto) || empty(resto2)) {
+                cerr << "O Comando Necessita De 2 Parametros" << endl;
+                goto finalWhile;
+            }
+            int ntripulantes = stoi(resto2);
+
+            if(ntripulantes < 0){
+                cout << "Nao Pode Comprar Tripulantes Negativos." << endl;
+                goto finalWhile;
+            }
+            if(ntripulantes == 0){
+                cout << "Nao Pode Comprar Zero Tripulantes." << endl;
+                goto finalWhile;
+            }
+
+            int idCaravana = stoi(resto);
+            Caravana *caravana = nullptr;
+
+            for (auto &c: caravanasAtivas) {
+                if (c->getId() == idCaravana) {
+                    caravana = c;
+                    break;
+                }
+            }
+            //comercio 20m tripulantes, militar 40 tripulantes, secreta 15
+
+            if (caravana) {
+                if (jogador.getMoedas() >= ntripulantes) {
+                    if (caravana->getTipo() == "Comercio") {
+                        if (caravana->getTripulantes() + ntripulantes <= 20) {
+                            caravana->setTripulantes(caravana->getTripulantes() + ntripulantes);
+                            jogador.setMoedas(jogador.getMoedas() - ntripulantes);
+                            cout << "A Caravana Passou A Ter " << caravana->getTripulantes() << " Tripulantes." << endl;
+                            cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
+
+                        } else
+                            cout << "A Caravana Nao Tem Capacidade Para " << caravana->getTripulantes() + ntripulantes
+                                 << ", Mas Sim 20 Tripulantes." << endl;
+
+
+                    } else if (caravana->getTipo() == "Militar") {
+                        if (caravana->getTripulantes() + ntripulantes <= 40) {
+                            caravana->setTripulantes(caravana->getTripulantes() + ntripulantes);
+                            jogador.setMoedas(jogador.getMoedas() - ntripulantes);
+                            cout << "A Caravana Passou A Ter " << caravana->getTripulantes() << " Tripulantes." << endl;
+                            cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
+
+                        } else
+                            cout << "A Caravana Nao Tem Capacidade Para " << caravana->getTripulantes() + ntripulantes
+                                 << ", Mas Sim 40 Tripulantes." << endl;
+
+
+                    } else if (caravana->getTipo() == "Secreta") {
+                        if (caravana->getTripulantes() + ntripulantes <= 15) {
+                            caravana->setTripulantes(caravana->getTripulantes() + ntripulantes);
+                            jogador.setMoedas(jogador.getMoedas() - ntripulantes);
+                            cout << "A Caravana Passou A Ter " << caravana->getTripulantes() << " Tripulantes." << endl;
+                            cout << "O Jogador Ficou Com " << jogador.getMoedas() << " Moedas." << endl;
+
+                        } else
+                            cout << "A Caravana Nao Tem Capacidade Para " << caravana->getTripulantes() + ntripulantes
+                                 << ", Mas Sim 15 Tripulantes." << endl;
+                    }
+                } else
+                    cout << "O Jogador Nao Tem Moedas Necessarias Para A Compra." << endl;
+            }
+
+
+        } else {
             cerr << "Comando Invalido." << endl;
         }
 
@@ -488,7 +562,7 @@ int UserInterface() {
     Jogador jogador(0);
     vector<Item *> itensAtivos;
     vector<Caravana *> caravanasAtivas;
-    char* bufferData = nullptr;
+    char *bufferData = nullptr;
     int n = fase1(grelha, jogador, itensAtivos, caravanasAtivas, bufferData);
 
     if (n == 1) {

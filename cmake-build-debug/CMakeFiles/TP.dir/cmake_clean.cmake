@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TP.dir/UI.cpp.obj"
   "CMakeFiles/TP.dir/UI.cpp.obj.d"
+  "CMakeFiles/TP.dir/buffer.cpp.obj"
+  "CMakeFiles/TP.dir/buffer.cpp.obj.d"
   "CMakeFiles/TP.dir/caravana.cpp.obj"
   "CMakeFiles/TP.dir/caravana.cpp.obj.d"
   "CMakeFiles/TP.dir/caravanasTipos.cpp.obj"

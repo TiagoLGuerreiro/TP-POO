@@ -152,6 +152,30 @@ UI.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/UI.cpp.s
 .PHONY : UI.cpp.s
 
+buffer.obj: buffer.cpp.obj
+.PHONY : buffer.obj
+
+# target to build an object file
+buffer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/buffer.cpp.obj
+.PHONY : buffer.cpp.obj
+
+buffer.i: buffer.cpp.i
+.PHONY : buffer.i
+
+# target to preprocess a source file
+buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/buffer.cpp.i
+.PHONY : buffer.cpp.i
+
+buffer.s: buffer.cpp.s
+.PHONY : buffer.s
+
+# target to generate assembly for a file
+buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TP.dir\build.make CMakeFiles/TP.dir/buffer.cpp.s
+.PHONY : buffer.cpp.s
+
 caravana.obj: caravana.cpp.obj
 .PHONY : caravana.obj
 
@@ -380,6 +404,9 @@ help:
 	@echo ... UI.obj
 	@echo ... UI.i
 	@echo ... UI.s
+	@echo ... buffer.obj
+	@echo ... buffer.i
+	@echo ... buffer.s
 	@echo ... caravana.obj
 	@echo ... caravana.i
 	@echo ... caravana.s

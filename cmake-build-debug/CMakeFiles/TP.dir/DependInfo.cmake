@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/UI.cpp" "CMakeFiles/TP.dir/UI.cpp.obj" "gcc" "CMakeFiles/TP.dir/UI.cpp.obj.d"
+  "C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/buffer.cpp" "CMakeFiles/TP.dir/buffer.cpp.obj" "gcc" "CMakeFiles/TP.dir/buffer.cpp.obj.d"
   "C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravana.cpp" "CMakeFiles/TP.dir/caravana.cpp.obj" "gcc" "CMakeFiles/TP.dir/caravana.cpp.obj.d"
   "C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/caravanasTipos.cpp" "CMakeFiles/TP.dir/caravanasTipos.cpp.obj" "gcc" "CMakeFiles/TP.dir/caravanasTipos.cpp.obj.d"
   "C:/Users/rafae/OneDrive/Documentos/GitHub/TP-POO/combate.cpp" "CMakeFiles/TP.dir/combate.cpp.obj" "gcc" "CMakeFiles/TP.dir/combate.cpp.obj.d"
