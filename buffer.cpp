@@ -31,6 +31,30 @@ char* save(string nome, const char* data){
 
     // Armazena o buffer no mapa, associado ao nome
     buffers[nome] = novoBuffer;
-
+    cout << novoBuffer;
     return novoBuffer;  // Retorna o ponteiro para o buffer
+}
+
+void lists(){
+    for (const auto& entry : buffers) {
+        cout << "Nome do buffer: " << entry.first << endl;
+    }
+}
+
+void loads(string nome){
+    for (const auto& entry : buffers) {
+        if(entry.first == nome)
+            cout << "Nome do buffer: " << entry.first << endl;
+            cout << "Conteudo - \n" << entry.second;
+    }
+}
+
+void limparBuffer(string nome) {
+    auto it = buffers.find(nome);  // Tenta encontrar o buffer pelo nome
+    if (it != buffers.end()) {  // verifica se o buffer existe
+        delete[] it->second;  // Libera a memória alocada para o buffer
+        buffers.erase(it);  // Remove o buffer do mapa
+        cout << "Buffer '" << nome << "' apagado com sucesso!" << endl;
+    } else
+        cout << "Buffer '" << nome << "' nao encontrado!" << endl;
 }

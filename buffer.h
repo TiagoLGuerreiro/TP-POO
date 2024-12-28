@@ -9,6 +9,9 @@ using namespace std;
 
 void deleteBuffer(char*& buffer);
 char* save(string nome,const char* data);
+void lists();
+void loads(string nome);
+void limparBuffer(string nome);
 
 #endif // BUFFER_H
 

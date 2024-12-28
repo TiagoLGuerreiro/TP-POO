@@ -442,35 +442,36 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
                 }
             }
 
-            int idCaravana, contaCaravanasNaCidade = 0;
-            for (idCaravana = 1; idCaravana < 2; idCaravana++) {
-
-                Caravana *caravana = nullptr;
-
-                for (auto &c: caravanasAtivas) {
-                    if (c->getId() == idCaravana) {
+            int contaCaravanasNaCidade = 0;
+            Caravana *caravana = nullptr;
+            for (auto &c: caravanasAtivas) {
+                    if (c->getPosicao() == indiceCidade) {
                         caravana = c;
-                        break;
+                        if (caravana->getPosicao() == indiceCidade && caravana->getCidade()){
+                            cout << "A Caravana " << caravana->getId() << " encontra-se Na Cidade " << resto[0] << "." << endl;
+                            contaCaravanasNaCidade++;
+                        }
                     }
-                }
-                if (caravana) {
-                    cout << caravana->getPosicao() << endl;
-                    cout << indiceCidade << endl;
-                    if (caravana->getPosicao() == indiceCidade && caravana->getCidade()){
-                        cout << "A Caravana " << idCaravana << " Encontra-se Na Cidade " << resto[0] << "." << endl;
-                        contaCaravanasNaCidade++;
-                    }
-                }
-            }
-            if(contaCaravanasNaCidade == 0)
+            } if(contaCaravanasNaCidade == 0)
                 cout << "Nao Se Encontram Caravanas Na Cidade." << endl;
 
         } else if (opcaoComando == "saves") {
             if (empty(resto))
                 cerr << "Comando Saves necessita de 1 parametro." << endl;
-            else{
+            else
                 save(resto, bufferData);
-            }
+        }else if (opcaoComando == "lists") {
+            lists();
+        }else if (opcaoComando == "loads") {
+            if (empty(resto))
+                cerr << "Comando Loads necessita de 1 parametro." << endl;
+            else
+                loads(resto);
+        }else if (opcaoComando == "dels") {
+            if (empty(resto))
+                cerr << "Comando Dels necessita de 1 parametro." << endl;
+            else
+                limparBuffer(resto);
         }else {
             cerr << "Comando Invalido." << endl;
         }

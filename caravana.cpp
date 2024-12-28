@@ -529,7 +529,7 @@ void Caravana::moverPara(int novaPosicao, Grelha &grelha, vector<Item *> &item, 
         if(!cidade){
             if (!destruida && getTipo() != "Barbara")
                 grelha.getMapa()[novaPosicao].setTipo(id + '0'); // Marca a nova posição com o identificador da caravana
-            else if (!destruida && getTipo() != "Barbara")
+            else if (!destruida && getTipo() == "Barbara")
                 grelha.getMapa()[novaPosicao].setTipo('!');
             else
                 grelha.getMapa()[novaPosicao].setTipo('.');
