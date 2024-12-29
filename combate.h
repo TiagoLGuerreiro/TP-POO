@@ -4,6 +4,8 @@
 
 #ifndef TP_COMBATE_H
 #define TP_COMBATE_H
+#include "caravana.h"
+#include <vector>
 
 using namespace std;
 
@@ -15,6 +17,9 @@ private:
     float sorteioB;
 
 public:
+
+    bool saoAdjacentes(int colunas, vector<Caravana*>& caravanasAtivas) ;
+
 };
 
 #endif //TP_COMBATE_H

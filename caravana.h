@@ -64,7 +64,7 @@ public:
     static bool verificarCaravanaID(const vector<Caravana*>& caravanasAtivas, int id);
 
     static void criar(vector<Caravana*>& caravanasAtivas, Grelha &grelha);
-    static void caravanaAparecer(vector<Caravana *> &caravanasAtivas, Grelha &grelha, char tipo);
+    static void caravanaAparecer(vector<Caravana *> &caravanasAtivas, Grelha &grelha, char tipo, int l, int c, int id);
 
     virtual void mover(int colunas, string& direcao, Grelha& grelha, int novaPosicao, int id, vector<Item*>& item, Jogador &jogador, vector<Caravana*> &caravanasAtivas);
     virtual void comportamentoAutonomo(Grelha& grelha, Jogador& jogador, vector<Item*>& itensAtivos, vector<Caravana*>& caravanasAtivas);

@@ -72,44 +72,76 @@ void Caravana::criar(vector<Caravana *> &caravanasAtivas, Grelha &grelha) {
                     break;
             }
         }else if(mapa[pos].getTipo() == '!'){
-            int tipo = rand() % 2; // Sorteia o id da caravana barbara
-            switch (tipo) {
-                case 0: caravanasAtivas.push_back(new Barbara(10, pos)); break;
-                case 1: caravanasAtivas.push_back(new Barbara(11, pos)); break;
-            }
+            int idBarbaro = rand() % 90 + 10; // Sorteia o id da caravana barbara
+            caravanasAtivas.push_back(new Barbara(idBarbaro, pos)); break;
         }
         pos++;
     } while (mapa.size() != pos);
 }
 
-void Caravana::caravanaAparecer(vector<Caravana *> &caravanasAtivas, Grelha &grelha, char tipo) {
+void Caravana::caravanaAparecer(vector<Caravana *> &caravanasAtivas, Grelha &grelha, char tipo, int l, int c, int id) {
     vector<Posicao> &mapa = grelha.getMapa();
     srand(time(0));
-    int pos = 0;
+    int pos = 0, check = 0, idBarbaro;
     if (tipo != '!') {
         switch (tipo) {
             case 'C':
-                caravanasAtivas.push_back(new Comercio(mapa[pos].getTipo() - '0', pos));
+                caravanasAtivas.push_back(new Comercio(id, l));
                 break;
             case 'M':
-                caravanasAtivas.push_back(new Militar(mapa[pos].getTipo() - '0', pos));
+                caravanasAtivas.push_back(new Militar(id, l));
                 break;
             case 'S':
-                caravanasAtivas.push_back(new Secreta(mapa[pos].getTipo() - '0', pos));
+                caravanasAtivas.push_back(new Secreta(id, l));
                 break;
         }
-    }else{
+        for (const auto &caravana: caravanasAtivas) {
+            if (caravana->getId() == id) {
+                caravana -> cidade = true;
+                break;
+            }
+        }
+    } else if(id == 0){
         do{
-            pos = rand() % mapa.size(); // Sorteia a posicao da caravana barbara
-            if(grelha.getMapa()[pos].getTipo() == '.'){
+            pos = rand() % mapa.size();
+            do{
+                idBarbaro = rand() % 90 + 10; // Sorteia o id da caravana barbara
                 for (const auto &caravana: caravanasAtivas) {
-                    if (caravana->getId() == 10 && caravana->getTipo() == "Barbara")
-                        caravanasAtivas.push_back(new Barbara(10, pos));
-                    else
-                        caravanasAtivas.push_back(new Barbara(11, pos));
+                    if (caravana->getId() != idBarbaro && caravana->getTipo() == "Barbara") {
+                        caravanasAtivas.push_back(new Barbara(idBarbaro, pos));
+                        check = 1;
+                        break;
+                    }
+                }
+            }while(check != 1);
+        }while(mapa[pos].getTipo() != '.');
+        for (const auto &caravana: caravanasAtivas) {
+            if (caravana->getId() == idBarbaro) {
+                caravana -> cidade = true;
+                break;
+            }
+        }
+    }else if(id == 200){
+        pos = l * grelha.getColunas() + c;
+        if(grelha.getMapa()[pos].getTipo() == '.'){
+            do{
+                idBarbaro = rand() % 90 + 10; // Sorteia o id da caravana barbara
+                for (const auto &caravana: caravanasAtivas) {
+                    if (caravana->getId() != idBarbaro && caravana->getTipo() == "Barbara") {
+                        caravanasAtivas.push_back(new Barbara(idBarbaro, pos));
+                        check = 1;
+                        break;
+                    }
+                }
+            }while(check != 1);
+            for (const auto &caravana: caravanasAtivas) {
+                if (caravana->getId() == idBarbaro) {
+                    caravana -> cidade = true;
+                    break;
                 }
             }
-        }while(grelha.getMapa()[pos].getTipo() == '.');
+        } else
+            cout << "Posicao invalida" << endl;
     }
 }
 
