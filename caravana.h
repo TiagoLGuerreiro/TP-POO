@@ -52,6 +52,9 @@ public:
     int getPosicao() const { return pos; }
     void setPosicao(int novaPosicao) {pos = novaPosicao;}
 
+    int getAgua() const {return aguaAtual;}
+    void setAgua(int novaAgua) {aguaAtual = novaAgua;}
+    int getCapacidadeAgua() const {return capacidadeAgua;}
     void mostrarInfo() const;
 
     bool getCidade(){return cidade;}

@@ -5,55 +5,65 @@
 #include "combate.h"
 #include <iostream>
 #include <sstream>
+#include <cmath>
 
-bool Combate::saoAdjacentes(int colunas, vector<Caravana*>& caravanasAtivas) {
+bool Combate::saoAdjacentes(int colunas, vector<Caravana *> &caravanasAtivas) {
     int linha1, coluna1, linha2, coluna2;
     bool check;
     for (const auto &caravana: caravanasAtivas) {
         linha1 = caravana->getPosicao() / colunas, coluna1 = caravana->getPosicao() % colunas;
-        for (const auto &caravana2: caravanasAtivas)
+        for (const auto &caravana2: caravanasAtivas) {
             linha2 = caravana2->getPosicao() / colunas, coluna2 = caravana2->getPosicao() % colunas;
-        if((abs(linha1 - linha2) + abs(coluna1 - coluna2)) == 1) // verificar a adjacência
-            check = true;
+            if ((abs(linha1 - linha2) + abs(coluna1 - coluna2)) == 1) // verificar a adjacência
+                check = true;
+        }
     }
 
     return check;
 }
-/*
-void realizarCombate(Caravana &caravana1, Caravana &caravana2) {
+
+void Combate::realizarCombate(Caravana &caravana1, Caravana &caravana2) {
     int sorteio1 = rand() % (caravana1.getTripulantes() + 1);
     int sorteio2 = rand() % (caravana2.getTripulantes() + 1);
 
-    if (sorteio1 > sorteio2) {
-        int perdaVencedor = caravana1.getTripulantes() * 0.2;
-        int perdaPerdedor = perdaVencedor * 2;
+    if (sorteio1 > sorteio2) { //caravana 1 Ganha
+        int perda = floor(caravana1.getTripulantes() * 0.2);
 
-        caravana1.perderTripulantes(perdaVencedor);
-        caravana2.perderTripulantes(perdaPerdedor);
-
-        caravana1.receberAgua(caravana2.transferirAgua(caravana1.getCapacidadeMaximaAgua()));
+        caravana1.setTripulantes(floor(caravana1.getTripulantes() - perda));
+        caravana2.setTripulantes(floor(caravana2.getTripulantes() - (2 * perda)));
 
         if (caravana2.getTripulantes() <= 0) {
-            caravana2.destruir();
+            int agua2 = caravana2.getAgua();
+            int agua1 = caravana1.getAgua();
+
+            caravana1.setAgua(agua1 + agua2);
+
+            if(caravana1.getAgua() > caravana1.getCapacidadeAgua())
+                caravana1.setAgua(caravana1.getCapacidadeAgua());
+
+            caravana2.setDestruida(true);
         }
-    } else if (sorteio2 > sorteio1) {
-        int perdaVencedor = caravana2.getTripulantes() * 0.2;
-        int perdaPerdedor = perdaVencedor * 2;
+    } else if (sorteio2 > sorteio1) { //caravana 2 Ganha
+        int perda = floor(caravana2.getTripulantes() * 0.2);
 
-        caravana2.perderTripulantes(perdaVencedor);
-        caravana1.perderTripulantes(perdaPerdedor);
-
-        caravana2.receberAgua(caravana1.transferirAgua(caravana2.getCapacidadeMaximaAgua()));
+        caravana2.setTripulantes(floor(caravana2.getTripulantes() - perda));
+        caravana1.setTripulantes(floor(caravana1.getTripulantes() - (2 * perda)));
 
         if (caravana1.getTripulantes() <= 0) {
-            caravana1.destruir();
+            int agua2 = caravana2.getAgua();
+            int agua1 = caravana1.getAgua();
+
+            caravana2.setAgua(agua1 + agua2);
+
+            if(caravana2.getAgua() > caravana2.getCapacidadeAgua())
+                caravana2.setAgua(caravana2.getCapacidadeAgua());
+
+            caravana1.setDestruida(true);
         }
-    } else {
-        // Empate: pode definir o que fazer nesse caso
     }
 }
 
-void resolverCombates(vector<Caravana *> &caravanasAtivas, Grelha &grelha) {
+/*void resolverCombates(vector<Caravana *> &caravanasAtivas, Grelha &grelha) {
     for (size_t i = 0; i < caravanasAtivas.size(); ++i) {
         if (caravanasAtivas[i]->isDestruida()) continue;
 
