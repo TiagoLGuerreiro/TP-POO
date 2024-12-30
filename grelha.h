@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include "jogador.h"
-#include "buffer.h"
 
 using namespace std;
 

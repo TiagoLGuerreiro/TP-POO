@@ -5,10 +5,10 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 #include <string>
+#include "grelha.h"
 using namespace std;
 
-void deleteBuffer(char*& buffer);
-char* save(string nome,const char* data);
+void save(string nome, Grelha& grelha);
 void lists();
 void loads(string nome);
 void limparBuffer(string nome);

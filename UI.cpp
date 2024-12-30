@@ -540,7 +540,7 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             if (empty(resto))
                 cerr << "Comando Saves necessita de 1 parametro." << endl;
             else
-                save(resto, bufferData);
+                save(resto, grelha);
 
 
         } else if (opcaoComando == "lists") {

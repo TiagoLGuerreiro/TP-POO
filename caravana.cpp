@@ -71,9 +71,10 @@ void Caravana::criar(vector<Caravana *> &caravanasAtivas, Grelha &grelha) {
                     caravanasAtivas.push_back(new Secreta(mapa[pos].getTipo() - '0', pos));
                     break;
             }
-        }else if(mapa[pos].getTipo() == '!'){
+        }
+        if(mapa[pos].getTipo() == '!'){
             int idBarbaro = rand() % 90 + 10; // Sorteia o id da caravana barbara
-            caravanasAtivas.push_back(new Barbara(idBarbaro, pos)); break;
+            caravanasAtivas.push_back(new Barbara(idBarbaro, pos));
         }
         pos++;
     } while (mapa.size() != pos);

@@ -49,7 +49,7 @@ void copyData(char* data, const char* buffer, int& pointer, int maxSize) {
     }
 }
 
-char* Grelha::lerFicheiro(const std::string &nomeFicheiro, Jogador &jogador, vector<Item *> &item) {
+char* Grelha::lerFicheiro(const string &nomeFicheiro, Jogador &jogador, vector<Item *> &item) {
     FILE* fileopen = fopen(nomeFicheiro.c_str(), "r");
     if(!fileopen) {
         cerr << "Erro ao abrir o arquivo!" << endl;

@@ -3,36 +3,35 @@
 //
 
 #include "buffer.h"
+#include "grelha.h"
 #include <iostream>
 #include <cstring>
 #include <unordered_map>
+#include <sstream>
 using namespace std;
 
 unordered_map<string, char*> buffers;
 
-void deleteBuffer(char*& buffer) {
-    if (buffer != nullptr) {
-        delete[] buffer; // Liberta a memória
-        buffer = nullptr; // Evitar ponteiro pendente
-        cout << "Buffer deleted com sucesso." << endl;
-    } else {
-        cout << "Copia do buffer nao existe." << endl;
+void save(string nome, Grelha& grelha){
+// Captura a saída da grelha como uma string
+    ostringstream oss;
+    for (int i = 0; i < grelha.getLinhas(); ++i) {
+        for (int j = 0; j < grelha.getColunas(); ++j) {
+            oss << grelha.getMapa()[i * grelha.getColunas() + j].getTipo();
+        }
+        oss << '\n';  // Nova linha após cada linha do mapa
     }
-}
 
-char* save(string nome, const char* data){
-
-    // Atribui a memória para o novo buffer
-    int tamanho = strlen(data) + 1;  // Inclui o terminador nulo '\0'
+    // Converte o conteúdo para um buffer
+    const string& mapaString = oss.str();
+    int tamanho = mapaString.size() + 1;  // Inclui o terminador nulo '\0'
     char* novoBuffer = new char[tamanho];
+    strcpy(novoBuffer, mapaString.c_str());
 
-    // Copia os dados para o novo buffer
-    strcpy(novoBuffer, data);
-
-    // Armazena o buffer no mapa, associado ao nome
+    // Armazena o buffer no mapa associado ao nome
     buffers[nome] = novoBuffer;
-    cout << novoBuffer;
-    return novoBuffer;  // Retorna o ponteiro para o buffer
+
+    cout << "Mapa salvo com o nome: " << nome << endl;
 }
 
 void lists(){
@@ -43,9 +42,10 @@ void lists(){
 
 void loads(string nome){
     for (const auto& entry : buffers) {
-        if(entry.first == nome)
+        if(entry.first == nome){
             cout << "Nome do buffer: " << entry.first << endl;
             cout << "Conteudo - \n" << entry.second;
+        }
     }
 }
 
