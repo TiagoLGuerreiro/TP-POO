@@ -8,14 +8,14 @@
 #include "utils.h"
 #include <iostream>
 #include <ctime>
-
+#include <cmath>
 using namespace std;
 
 CaixaPandora::CaixaPandora(int randomPos, int tempoRestante, char tipo) : Item(randomPos, tempoRestante, tipo){}
 
 void CaixaPandora::efeito(Caravana& caravana, Jogador& jogador, vector<Caravana*>& caravanasAtivas, Grelha &grelha) {
     cout << "Caixa de Pandora encontrada! 20% da tripulacao morreu \n";
-    //caravana.reduzirTripulacao(caravana.getTripulacao() * 0.2);
+    caravana.setTripulantes(floor(caravana.getTripulantes() - (caravana.getTripulantes() * 0.2)));
 }
 
 ArcaTesouro::ArcaTesouro(int randomPos, int tempoRestante, char tipo) : Item(randomPos, tempoRestante, tipo){}
@@ -29,7 +29,19 @@ Jaula::Jaula(int randomPos, int tempoRestante, char tipo) : Item(randomPos, temp
 
 void Jaula::efeito(Caravana& caravana, Jogador& jogador, vector<Caravana*>& caravanasAtivas, Grelha &grelha) {
     cout << "Jaula encontrada! Prisioneiros foram libertos e dicionados a tripulacao.\n";
-    //caravana.adicionarTripulacao(5);
+    caravana.setTripulantes(caravana.getTripulantes() + 5);
+    if(caravana.getTipo() == "Secreta"){
+        if(caravana.getTripulantes() > 15)
+            caravana.setTripulantes(15);
+    }
+    if(caravana.getTipo() == "Militar"){
+        if(caravana.getTripulantes() > 40)
+            caravana.setTripulantes(40);
+    }
+    if(caravana.getTipo() == "Comercia"){
+        if(caravana.getTripulantes() > 20)
+            caravana.setTripulantes(20);
+    }
 }
 
 Mina::Mina(int randomPos, int tempoRestante, char tipo) : Item(randomPos, tempoRestante, tipo) {}
