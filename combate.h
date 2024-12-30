@@ -18,8 +18,8 @@ private:
 
 public:
 
-    bool saoAdjacentes(int colunas, vector<Caravana*>& caravanasAtivas) ;
-    void realizarCombate(Caravana &caravana1, Caravana &caravana2);
+    static bool saoAdjacentes(int colunas, vector<Caravana*>& caravanasAtivas) ;
+    static void realizarCombate(Caravana &caravana1, Caravana &caravana2);
 
 };
 

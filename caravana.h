@@ -25,6 +25,7 @@ private:
     int instantesSemTripulantes;
     string ultimoMovimento;
     int instantesPossiveisSemTripulantes;
+    int nGalinhas = 0;
 
 public:
     Caravana(int id, int pos, int cargaAtual, int cargaMax, int aguaMax, int aguaAtual, int tripulantes, int numDes,const string& tipo, bool cidade, int instantesSemTripulantes, bool comportamento);
@@ -39,6 +40,9 @@ public:
 
     void setDestruida(bool status) { destruida = status; }
     bool isDestruida() const { return destruida; }
+
+    void setGalinha(int novaGalinha) {nGalinhas = novaGalinha;}
+    int getGalinha(){return nGalinhas;}
 
     int getTripulantes() const { return tripulantes ;}
     void setTripulantes(int novoTripulantes);

@@ -215,7 +215,7 @@ void Caravana::mover(int colunas, string &direcao, Grelha &grelha, int novaPosic
                 break; // Sai do loop após processar o item
             }
         }
-    } else if (grelha.getMapa()[novaPosicao].getTipo() == '+') {
+    } else if (grelha.getMapa()[novaPosicao].getTipo() == '+' && !(getTipo() == "Secreta")) {
         cout << "Achaste uma montanha, nao te consegues mover nessa direcao" << endl;
         return;
     } else if (grelha.getMapa()[novaPosicao].getTipo() == '!')
@@ -235,7 +235,8 @@ void Caravana::mover(int colunas, string &direcao, Grelha &grelha, int novaPosic
         cout << "Saiste da cidade!" << endl;
         grelha.getMapa()[novaPosicao].setTipo(id + '0');
         cidade = false;
-    }else
+    }
+    else
         grelha.getMapa()[posicao].setTipo('.'); // Marca a posição antiga como deserto
 
     // Atualizar a posição no mapa

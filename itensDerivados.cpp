@@ -45,5 +45,6 @@ void Surpresa::efeito(Caravana& caravana, Jogador& jogador, vector<Caravana*>& c
     srand(time(0));
     int quantidadeGalinhas = (rand() + 1) % 11;
     cout << "Surpresa! Achaste o Deus Ares. Ele deu-te " << quantidadeGalinhas << " galinhas" << endl;
+    caravana.setGalinha(quantidadeGalinhas);
     // Implementação criativa
 }

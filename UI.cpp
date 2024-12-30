@@ -429,7 +429,6 @@ int fase2(Grelha &grelha, Jogador &jogador, vector<Item *> &itensAtivos, vector<
             cout << "Vender Mercadoria " << grelha.getVendaM() << " Moedas Cada Tonelada" << endl;
             cout << "Comprar Mercadoria " << grelha.getCompraM() << " Moedas Cada Tonelada" << endl;
             cout << "Comprar Caravana " << grelha.getPrecoC() << " Moedas Cada" << endl;
-            cout << jogador.getMoedas() << endl;
 
         } else if (opcaoComando == "vende") {
             vende:

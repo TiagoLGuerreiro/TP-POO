@@ -26,8 +26,18 @@ void Combate::realizarCombate(Caravana &caravana1, Caravana &caravana2) {
     int sorteio1 = rand() % (caravana1.getTripulantes() + 1);
     int sorteio2 = rand() % (caravana2.getTripulantes() + 1);
 
+    if (caravana1.getGalinha() > 0) {
+        cout << "Devido Ao Seu Item Acomulou " << caravana1.getGalinha() << " Galinhas" << endl;
+        cout << "Elas Irao Ajuda-lo Neste Combate!" << endl;
+
+        sorteio1 += floor(caravana1.getGalinha());
+        caravana1.setGalinha(0);
+    }
+
     if (sorteio1 > sorteio2) { //caravana 1 Ganha
         int perda = floor(caravana1.getTripulantes() * 0.2);
+
+        cout << "A Caravana Barbara Ganhou!" << endl;
 
         caravana1.setTripulantes(floor(caravana1.getTripulantes() - perda));
         caravana2.setTripulantes(floor(caravana2.getTripulantes() - (2 * perda)));
@@ -38,13 +48,15 @@ void Combate::realizarCombate(Caravana &caravana1, Caravana &caravana2) {
 
             caravana1.setAgua(agua1 + agua2);
 
-            if(caravana1.getAgua() > caravana1.getCapacidadeAgua())
+            if (caravana1.getAgua() > caravana1.getCapacidadeAgua())
                 caravana1.setAgua(caravana1.getCapacidadeAgua());
 
             caravana2.setDestruida(true);
         }
     } else if (sorteio2 > sorteio1) { //caravana 2 Ganha
         int perda = floor(caravana2.getTripulantes() * 0.2);
+
+        cout << "A Caravana De " << caravana2.getTipo() << " Ganhou O Combate." << endl;
 
         caravana2.setTripulantes(floor(caravana2.getTripulantes() - perda));
         caravana1.setTripulantes(floor(caravana1.getTripulantes() - (2 * perda)));
@@ -55,31 +67,10 @@ void Combate::realizarCombate(Caravana &caravana1, Caravana &caravana2) {
 
             caravana2.setAgua(agua1 + agua2);
 
-            if(caravana2.getAgua() > caravana2.getCapacidadeAgua())
+            if (caravana2.getAgua() > caravana2.getCapacidadeAgua())
                 caravana2.setAgua(caravana2.getCapacidadeAgua());
 
             caravana1.setDestruida(true);
         }
     }
 }
-
-/*void resolverCombates(vector<Caravana *> &caravanasAtivas, Grelha &grelha) {
-    for (size_t i = 0; i < caravanasAtivas.size(); ++i) {
-        if (caravanasAtivas[i]->isDestruida()) continue;
-
-        for (size_t j = i + 1; j < caravanasAtivas.size(); ++j) {
-            if (caravanasAtivas[j]->isDestruida()) continue;
-
-            if (saoAdjacentes(caravanasAtivas[i]->getPos(), caravanasAtivas[j]->getPos(), grelha.getColunas())) {
-                realizarCombate(*caravanasAtivas[i], *caravanasAtivas[j]);
-            }
-        }
-    }
-
-    // Remover caravanas destruídas do vetor
-    caravanasAtivas.erase(
-            std::remove_if(caravanasAtivas.begin(), caravanasAtivas.end(),
-                           [](Caravana *c) { return c->isDestruida(); }),
-            caravanasAtivas.end()
-    );
-}*/
